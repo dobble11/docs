@@ -28,6 +28,13 @@ module.exports = {
         'valid-jsdoc':'error',          //强制使用有效JSDoc注释,参数，返回
         'no-fallthrough':'error',       //禁止case落空，在 switch/case 语句中出现了穿透特性     
         'no-param-reassign':'error',     //禁止对 function 的参数进行重新赋值
+        'for-direction':'error',        //禁止 for 循环出现方向错误的循环，比如 for (i = 0; i < 10; i--)
+        'getter-return':'error',        //getter 必须有返回值，并且禁止返回空或者return;
+        'curly':'error',                //if 后面必须要有 {，除非是单行 if
+        'dot-location':'error',         //链式调用的时候，点号必须放在第二行开头处，禁止放在第一行结尾处
+        'no-floating-decimal':'warn',   //表示小数时，禁止省略 0，比如 .1
+        'no-redeclare':'error',         //禁止重复定义变量
+        'no-label-var':'error',         //禁止 label 名称与定义过的变量重复
     },
     overrides: [                        //如果同一个目录下的文件需要有不同的配置
         {
