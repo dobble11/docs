@@ -4,7 +4,8 @@
   "description": "eslint-test",
   "main": "test-eslint.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "author": "zhaomeiling",
   "license": "ISC",
@@ -18,15 +19,14 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
+    "lint-staged": "^7.3.0",
     "prettier": "^1.14.2"
   },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "no-console": "off"
-    }
+  "lint-staged": {
+    "src/**/*.js": [
+        "eslint",
+        "prettier --config .prettierrc --write",
+        "git add"
+    ]
   }
 }

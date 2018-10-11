@@ -1,7 +1,6 @@
 var infoObj=[
     {
         name:"张三",
-        sex:'female',
         age:30
     },
     {
