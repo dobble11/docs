@@ -26,7 +26,7 @@ module.exports = (env = {}) => ({
               fallback: {
                 loader: 'style-loader',
                 options: {
-                  hmr: false
+                  hmr: true
                 }
               },
               use: [
