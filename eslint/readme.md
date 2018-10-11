@@ -165,16 +165,61 @@ rules: {                            //启用的规则及其各自的错误级别
 
 http://web.jobbole.com/94786/?tdsourcetag=s_pctim_aiomsg
 
+> - prettier 主要是为了格式化代码
+> - eslint 主要负责代码规则校验
 
+##### 补充
+
+eslint-config-prettier ：
+
+如果eslint与prettier规则同时定义了，关闭额外报错，只显示一条。*(如果eslint只负责检测代码，prettier格式化代码，互不干扰，则用不到此插件)*
+
+##### prettier配置
+
+prettier 的检查规则是通过配置文件`.prettierrc` 实现的，不过一般来说，只需要配置少部分规则。
+
+```javascript
+{
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": true
+}
+//更详细的配置项，请看https://prettier.io/docs/en/configuration.html
+```
+
+##### 配置editorconfig
+
+> - 帮助多人开发再不同编辑器开发汇总维护一致的代码风格
+> - 自动格式化或者自动排版，对代码格式化，减轻一定的代码格式化压力
+
+```javascript
+// 放在项目根目录的.editorconfig文件
+root = true
+ 
+[*]
+charset = utf-8					//编码格式
+indent_style = tab			//indent_style
+indent_size = 2				//缩进
+end_of_line = lf			//换行符
+insert_final_newline = true	 //文件以一个空白行结尾
+trim_trailing_whitespace = true //表示会除去换行行首的任意空白字符
+```
 
 ### lint-staged构建代码检查
+
+什么是lint-staged
+
+针对暂存的文件运行linters
 
 ##### 安装和配置步骤
 
 > 安装依赖
 >
 > ```javascript
-> npm install -D lint-staged
+> npm install --save-dev lint-staged husky
 > ```
 >
 > 修改package.json配置
@@ -185,12 +230,16 @@ http://web.jobbole.com/94786/?tdsourcetag=s_pctim_aiomsg
 >     "precommit": "lint-staged"
 >   },
 >   "lint-staged": {
->     "src/**/*.js": "eslint"
+>     "src/**/*.js": [
+>         "eslint",
+>         "prettier --write",
+>         "git add"
+>     ]
 >   }
 > }
 > ```
 >
-> 算法
+>
 >
 >
 
