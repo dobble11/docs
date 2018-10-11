@@ -41,7 +41,7 @@ console.log(sortObj);
 // };
 
 // no-unused-vars -- 定义过的变量必须使用
-// var unusevar;
+var unusevar;
 
 //curly -- if 后面必须要有 {，除非是单行 if
 let foo = true

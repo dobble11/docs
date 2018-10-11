@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "eslint-test",
   "main": "test-eslint.js",
-  "scripts": {
+  "script": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged",
     "prettier": "prettier --config .prettierrc src/**/*.{js,jsx,json,less}"
