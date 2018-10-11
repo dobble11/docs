@@ -163,8 +163,6 @@ rules: {                            //启用的规则及其各自的错误级别
 
 ### eslint与prettier配合使用
 
-http://web.jobbole.com/94786/?tdsourcetag=s_pctim_aiomsg
-
 > - prettier 主要是为了格式化代码
 > - eslint 主要负责代码规则校验
 
@@ -244,22 +242,4 @@ trim_trailing_whitespace = true //表示会除去换行行首的任意空白字�
 >
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://segmentfault.com/a/1190000009546913
 
