@@ -24,7 +24,7 @@ npm i -D webpack-dev-server
 
 如果你使用 webpack 4+ 版本，你还需要安装 CLI。
 
-```bash
+```sh
 npm install -D webpack-cli
 ```
 
@@ -145,3 +145,7 @@ module.exports = {
   }
 };
 ```
+
+## 分割 css
+
+## 分割 js
