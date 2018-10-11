@@ -196,7 +196,6 @@ npm i -D extract-text-webpack-plugin
 module.exports = (env = {}) => ({
   module: {
     rules: [
-      {
           {
             test: /\.css$/,
 +            loader: ExtractTextPlugin.extract({
@@ -217,8 +216,7 @@ module.exports = (env = {}) => ({
 +              ]
 +           }),
             exclude: /node_modules/
-          },
-      }
+          }
     ]
   },
   plugins: [
