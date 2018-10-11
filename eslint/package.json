@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "eslint-test",
   "main": "test-eslint.js",
-  "script": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged",
     "prettier": "prettier --config .prettierrc src/**/*.{js,jsx,json,less}"
@@ -31,5 +31,10 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

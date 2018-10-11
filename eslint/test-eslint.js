@@ -34,11 +34,11 @@ console.log(sortObj);
 // }
 
 // getter-return -- getter 必须有返回值，并且禁止返回空或者return;
-// let user = {
-//     get name() {
-//         // 无返回值
-//     }
-// };
+let user = {
+    get name() {
+        // 无返回值
+    }
+};
 
 // no-unused-vars -- 定义过的变量必须使用
 var unusevar;
