@@ -29,9 +29,9 @@ console.log(sortObj);
 
 // }
 // for-direction -- 禁止 for 循环出现方向错误的循环
-// for (let i = 0; i < 10; i--) {
-//     // do something
-// }
+for (let i = 0; i < 10; i--) {
+    // do something
+}
 
 // getter-return -- getter 必须有返回值，并且禁止返回空或者return;
 let user = {
