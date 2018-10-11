@@ -17,6 +17,8 @@
 
 ## 开始
 
+> 一个快速使用 webpack 的项目[模板](https://github.com/dobble11/docs/tree/master/webpack)
+
 ```sh
 npm i -D webpack
 npm i -D webpack-dev-server
