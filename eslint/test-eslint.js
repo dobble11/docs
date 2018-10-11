@@ -44,13 +44,13 @@ console.log(sortObj);
 // var unusevar;
 
 //curly -- if 后面必须要有 {，除非是单行 if
-// let foo = true
-// if (foo)
-//     console.log(foo);
+let foo = true
+if (foo)
+    console.log(foo);
 
 //no-floating-decimal -- 表示小数时，禁止省略 0，比如 .1
-// let a=.1;
-// console.log(a);
+let a=.1;
+console.log(a);
 
 //no-redeclare  -- 重复定义变量
 var infoObj=[];

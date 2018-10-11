@@ -25,19 +25,19 @@ ESLint 插件化的js代码检测工具：
 
 > 安装：
 >
-> ```javascript
+> ```sh
 > npm install -g eslint
 > ```
 >
 > 设置配置文件：
 >
-> ```javascript
+> ```sh
 > eslint --init
 > ```
 >
 > 文件或者项目运行eslint
 >
-> ```javascript
+> ```sh
 > eslint xxx.js
 > ```
 
@@ -63,7 +63,7 @@ console.log(sortObj);
 
 package.json内`eslintConfig`：
 
-```javascript
+```diff
 {
   "name": "eslint-test",
   "version": "1.0.0",
@@ -77,14 +77,14 @@ package.json内`eslintConfig`：
   "devDependencies": {
     ...
   },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-        "node": true
-    },
-    "rules": {
-        "no-console": "off"
-    },
++  "eslintConfig": {
++    "extends": "eslint:recommended",
++    "env": {
++        "node": true
++    },
++    "rules": {
++        "no-console": "off"
++    },
     ...
   }
 }
@@ -189,12 +189,12 @@ prettier 的检查规则是通过配置文件`.prettierrc` 实现的，不过一
 
 ```javascript
 {
-    "semi": true,
-    "singleQuote": true,
-    "arrowParens": "avoid",
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": true
+    "semi": true,				//启用 句尾分号
+    "singleQuote": true,		//字符串使用单引号
+    "arrowParens": "avoid",		//避免箭头函数括号出现  例如单个参数不要括号 （a）=> {} 转换 a => {}
+    "printWidth": 80,			//单行字符最大个数
+    "tabWidth": 2,				//tab宽度为2个字符  当useTabs为false时，用2个空格填充，而不是单个tab字符
+    "useTabs": true				//是否禁用 tab
 }
 //更详细的配置项，请看https://prettier.io/docs/en/configuration.html
 ```
@@ -219,40 +219,48 @@ trim_trailing_whitespace = true //表示会除去换行行首的任意空白字�
 
 ### lint-staged构建代码检查
 
-什么是lint-staged
+##### 什么是lint-staged
 
-针对暂存的文件运行linters
+针对暂存的文件运行linters，commit前依次执行写好的任务（ESLint 和 Prettier）
 
 ##### 安装和配置步骤
 
 > 安装依赖
 >
-> ```javascript
+> ```sh
 > npm install --save-dev lint-staged husky
 > ```
 >
 > 修改package.json配置
 >
-> ```javascript
+> ```diff
 > {
 >   "scripts": {
->     "precommit": "lint-staged"
+> +    "precommit": "lint-staged"
 >   },
->   "lint-staged": {
->     "src/**/*.js": [
->         "eslint",
->         "prettier --write",
->         "git add"
->     ]
->   }
+> +  "lint-staged": {
+> +    "src/**/*.js": [
+> +		"prettier --write",
+> +        "eslint",
+> +        "git add"
+> +    ]
+> +  }
 > }
 > ```
 >
-> 使用
->
->
 >
 >
 
+`"precommit": "lint-staged"`git commit时会执行这个命令，根据lint-staged配置进行校验。
 
+##### 原理
+
+在`git`中，我们每次执行`commit`、`push`等操作时，都会触发一个或多个`shell`脚本，这些脚本我们称为`钩子`，它们存放在`.git/hooks`目录下。
+
+- 前置（pre）钩子，在动作完成前调用
+- 后置（post）钩子，在动作完成后执行
+
+![](F:\personal\docs\eslint\gitHook.png)
+
+在钩子里写入指令，执行git操作前先运行钩子里的指令，调用eslint和prettier检查代码，如果代码不符合规范就非零(warn,error)退出，git操作就会停止。
 
