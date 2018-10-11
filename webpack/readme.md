@@ -198,7 +198,7 @@ module.exports = (env = {}) => ({
   module: {
     rules: [
           {
-            test: /\.css$/,
+             test: /\.css$/,
 +            loader: ExtractTextPlugin.extract({
 +              fallback: {
 +                loader: 'style-loader',
@@ -229,3 +229,22 @@ module.exports = (env = {}) => ({
 ```
 
 ## 分割 js
+
+正是由于 webpack 默认将所有模块打包进一个 js 文件中，导致单个 js 文件过大，加载不需要的 js 等问题，虽然可以通过设置 `entry` 为多个入口，将第三方包打包进独立的 js 文件中，`main.js` 中只包含业务代码，但随着项目业务的不断增多，还是无法解决单个 js 文件过大问题，这时正是代码分割的意义。
+
+基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的向应速度。
+
+webpack 支持最新的 es 提案 `import()` 函数，这样导入的组件会返回一个 `promise` 对象，webpack 也会将这个组件划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心组件的使用。
+
+由于返回的是 `promise` 对象，无法与 `Route` 组件直接使用，为了讲解简单，直接推荐第二种方法，使用第三方包。
+
+##### 1.安装 `react-loadable`
+
+```sh
+npm -i react-loadable
+```
+
+##### 2.修改使用 `Route` 组件部分的引用
+
+```js
+```
