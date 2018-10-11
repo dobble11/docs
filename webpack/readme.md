@@ -193,6 +193,7 @@ npm i -D extract-text-webpack-plugin
 
 ```diff
 + const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = (env = {}) => ({
   module: {
     rules: [
