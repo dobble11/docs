@@ -39,6 +39,7 @@ webpack 配置文件默认名为：`webpack.config.js` or `webpackfile.js` 也�
   }
 ```
 
+- `--inline`：启用内联模式，当使用内联模式(inline mode)时，在开发工具(DevTools)的控制台(console)将显示消息，如：在重新加载之前，在一个错误之前，或者模块热替换(Hot Module Replacement)启用时。这可能显得很繁琐。
 - `--hot`：启用模块热替换
 - `--env.dev`：设置 `process.env.NODE_ENV` 值为 `development`
 - `-p`：设置 `process.env.NODE_ENV` 值为 `production` ，并会启用 `UglifyJSPlugin` 来压缩代码
