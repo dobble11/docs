@@ -99,13 +99,21 @@ module.exports = [
 
 ## 常用配置
 
-**webpack.cofig.js**
+### 1.安装相关依赖包
+
+```sh
+npm i -D @babel/core @babel/preset-env babel-loader css-loader file-loader style-loader url-loader
+npm i -D html-webpack-plugin
+```
+
+### 2.创建**webpack.cofig.js**文件
 
 ```js
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: 'index', //output name默认为main
+module.exports = (env = {}) => ({
+  entry: 'index', //output file name默认为main
   entry: ['one', 'two'], //output：main.js
   entry: {
     main: 'index',
@@ -125,8 +133,13 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
+          //loader配置选项
           presets: ['@babel/preset-env']
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -143,10 +156,77 @@ module.exports = {
         }
       }
     ]
-  }
-};
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  ],
+  devServer: {
+    host: '127.0.0.1',
+    port: 80,
+    stats: 'errors-only'
+  },
+  devtool: env.dev ? '#eval-source-map' : '#source-map' //生产环境生成.map文件
+});
 ```
 
+> 注：一个完整的配置的例子 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)，不包含代码分割
+
 ## 分割 css
+
+当不使用 js 完全控制渲染时，webpack 默认将 css 打包进 js 中就会带来一些问题：
+
+- 加载页面时会出现片刻无样式问题，由于 webpack 添加打包后 js 放在 body 的最后位置
+- 修改打包后的 css 带来困难（主要问题）
+- 导致单个 js 包过大
+
+### 1.安装 `extract-text-webpack-plugin` 插件
+
+```sh
+npm i -D extract-text-webpack-plugin
+```
+
+> 如果使用 webpack 4+版本，需要安装 `npm i -D extract-text-webpack-plugin@next` 作为替换
+
+### 2.修改 `webpack.config.js` 配置文件
+
+```diff
++ const ExtractTextPlugin = require('extract-text-webpack-plugin');
+module.exports = (env = {}) => ({
+  module: {
+    rules: [
+      {
+          {
+            test: /\.css$/,
++            loader: ExtractTextPlugin.extract({
++              fallback: {
++                loader: 'style-loader',
++                options: {
++                  hmr: true
++                }
++              },
++              use: [
++                {
++                  loader: 'css-loader',
++                  options: {
++                    importLoaders: 1,
++                    minimize: true
++                  }
++                }
++              ]
++           }),
+            exclude: /node_modules/
+          },
+      }
+    ]
+  },
+  plugins: [
++    new ExtractTextPlugin({
++      filename: '[name].css?[hash:8]'
++    })
+  ]
+});
+```
 
 ## 分割 js
