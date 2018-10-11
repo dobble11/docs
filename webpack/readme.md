@@ -99,14 +99,14 @@ module.exports = [
 
 ## 常用配置
 
-### 1.安装相关依赖包
+##### 1.安装相关依赖包
 
 ```sh
 npm i -D @babel/core @babel/preset-env babel-loader css-loader file-loader style-loader url-loader
 npm i -D html-webpack-plugin
 ```
 
-### 2.创建**webpack.cofig.js**文件
+##### 2.创建**webpack.cofig.js**文件
 
 ```js
 const path = require('path');
@@ -181,7 +181,7 @@ module.exports = (env = {}) => ({
 - 修改打包后的 css 带来困难（主要问题）
 - 导致单个 js 包过大
 
-### 1.安装 `extract-text-webpack-plugin` 插件
+##### 1.安装 `extract-text-webpack-plugin` 插件
 
 ```sh
 npm i -D extract-text-webpack-plugin
@@ -189,7 +189,7 @@ npm i -D extract-text-webpack-plugin
 
 > 如果使用 webpack 4+版本，需要安装 `npm i -D extract-text-webpack-plugin@next` 作为替换
 
-### 2.修改 `webpack.config.js` 配置文件
+##### 2.修改 `webpack.config.js` 配置文件
 
 ```diff
 + const ExtractTextPlugin = require('extract-text-webpack-plugin');
