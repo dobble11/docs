@@ -53,10 +53,10 @@ webpack 配置接收三种类型选项
   > 一个选项 map 对象（`argv`）作为第二个参数。这个对象描述了传递给 webpack 的选项，并且具有 [`output-filename`](/api/cli/#output-options) 和 [`optimize-minimize`](/api/cli/#optimize-options) 等 key。
 
 ```js
-module.exports = (env, argv) => {
+module.exports = (env, argv) => ({
   devtool: env.production ? 'source-maps' : 'eval';
   /* ... */
-};
+});
 ```
 
 - 导出为一个 Promise
