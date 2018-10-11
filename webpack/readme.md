@@ -230,7 +230,7 @@ module.exports = (env = {}) => ({
 
 ## 分割 js
 
-正是由于 webpack 默认将所有模块打包进一个 js 文件中，导致单个 js 文件过大，加载不需要的 js 等问题，虽然可以通过设置 `entry` 为多个入口，将第三方包打包进独立的 js 文件中，`main.js` 中只包含业务代码，但随着项目业务的不断增多，还是无法解决单个 js 文件过大问题，这时正是代码分割的意义。
+正是由于 webpack 默认将所有模块打包进一个 js 文件中，导致单个 js 文件过大，加载当前页面不需要的 js 等问题，虽然可以通过设置 `entry` 为多个入口，将第三方包打包进独立的 js 文件中，`main.js` 中只包含业务代码，但随着项目业务的不断增多，还是无法解决单个 js 文件过大问题，这时正是代码分割的意义。
 
 基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的向应速度。
 
@@ -241,10 +241,36 @@ webpack 支持最新的 es 提案 `import()` 函数，这样导入的组件会�
 ##### 1.安装 `react-loadable`
 
 ```sh
-npm -i react-loadable
+npm i react-loadable
 ```
 
 ##### 2.修改使用 `Route` 组件部分的引用
 
-```js
+```diff
++import Loadable from 'react-loadable';
+-import App from './App';
+-import SignIn from './SignIn';
+-import Demo from './Demo';
+
++const App = Loadable({
++  loader: () => import('./App')
++});
++const SignIn = Loadable({
++  loader: () => import('./SignIn')
++});
++const Demo = Loadable({
++  loader: () => import('./Demo')
++});
+
+ReactDOM.render(
+  <Router>
+    <div className="wraper">
+      <Route exact path="/" component={App} />
+      <Route path="/home" component={App} />
+      <Route path="/demo" component={Demo} />
+      <Route path="/signin" component={SignIn} />
+    </div>
+  </Router>,
+  document.getElementById('root')
+);
 ```
