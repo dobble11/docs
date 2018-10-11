@@ -5,12 +5,10 @@ var infoObj=[
     },
     {
         name:"李四",
-        sex:'male',
         age:20
     },
     {
         name:"王五",
-        sex:'female',
         age:40
     }
 ];
