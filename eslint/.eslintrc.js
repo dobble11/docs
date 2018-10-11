@@ -1,5 +1,5 @@
 module.exports = {
-    extends: "eslint:recommended",      //继承配置
+    extends: ["eslint:recommended","prettier"],      //继承配置
     parserOptions: {
         ecmaVersion: 6,     //指定ECMAScript支持的版本，6为ES6
         sourceType: "module", //指定来源的类型，有两种”script”或”module”
@@ -7,9 +7,9 @@ module.exports = {
             jsx: true      //启动JSX
         }
     },
-    // plugins: [
-	// 	"prettier"
-	// ],
+    plugins: [
+		"prettier"
+	],
     env: {                              //脚本的运行环境
         browser: true,
         node: true,
