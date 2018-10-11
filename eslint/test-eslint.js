@@ -1,16 +1,16 @@
 var infoObj=[
-    {
-        name:"张三",
-        age:30
-    },
-    {
-        name:"李四",
-        age:20
-    },
-    {
-        name:"王五",
-        age:40
-    }
+            {
+                name:"张三",
+                age:30
+            },
+            {
+                name:"李四",
+                age:20
+            },
+            {
+                name:"王五",
+                age:40
+            }
 ];
 //升序排列
 function compare(property){

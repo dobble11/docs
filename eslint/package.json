@@ -5,7 +5,8 @@
   "main": "test-eslint.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prettier": "prettier --config .prettierrc src/**/*.{js,jsx,json,less}"
   },
   "author": "zhaomeiling",
   "license": "ISC",
@@ -19,14 +20,16 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
+    "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "shebang-regex": "^2.0.0"
   },
   "lint-staged": {
     "src/**/*.js": [
-        "eslint",
-        "prettier --config .prettierrc --write",
-        "git add"
+      "eslint",
+      "prettier --write",
+      "git add"
     ]
   }
 }
