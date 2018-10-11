@@ -175,10 +175,10 @@ module.exports = (env = {}) => ({
 
 ## 分割 css
 
-当不使用 js 完全控制渲染时，webpack 默认将 css 打包进 js 中就会带来一些问题：
+webpack 默认将 css 打包进 js 中，当不使用 js 完全控制渲染时，就会带来一些问题：
 
-- 加载页面时会出现片刻无样式问题，由于 webpack 添加打包后 js 放在 body 的最后位置
-- 修改打包后的 css 带来困难（主要问题）
+- 首次加载页面时会出现片刻无样式问题，由于 webpack 添加打包后 js 放在 body 的最后位置
+- 修改打包后的 css 带来困难（主要原因）
 - 导致单个 js 包过大
 
 ##### 1.安装 `extract-text-webpack-plugin` 插件
