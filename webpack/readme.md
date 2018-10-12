@@ -15,6 +15,17 @@
 - 加载器(loader)
 - 插件(plugins)
 
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器，webpack 会从入口开始处理应用程序，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。
+
+由于 webpack 自身只能理解 JavScript，loader 将各种类型文件转换成 webpack 能够处理的有效模块，这也正是 webpack 的强大扩展能力。
+
+> 在 webpack 的配置中 loader 有两个重要属性：
+>
+> - `test` ：用于标识出需要处理某个或某些文件。
+> - `use` ：表示应该使用哪些 loader，当需要一个 loader 时，可以使用 `loader` 属性
+
+loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量。插件接口功能极其强大，可以用来处理各种各样的任务。
+
 ## 开始
 
 > 一个快速使用 webpack 的项目[模板](https://github.com/dobble11/docs/tree/master/webpack)
@@ -61,11 +72,11 @@ module.exports = (env, argv) => ({
 });
 ```
 
-- 导出为一个 Promise
+- 导出为一个返回 Promise 的函数
 
 ```js
-module.exports = () => {
-  return new Promise((resolve, reject) => {
+module.exports = () =>
+  new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         entry: './app.js'
@@ -73,10 +84,9 @@ module.exports = () => {
       });
     }, 5000);
   });
-};
 ```
 
-- 导出多个配置对象
+- 导出多个配置对象数组或单个对象
 
 ```js
 module.exports = [
