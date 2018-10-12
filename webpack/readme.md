@@ -260,7 +260,7 @@ module.exports = (env = {}) => ({
 
 webpack 支持最新的 es 提案 `import()` 函数，这样导入的组件会返回一个 `Promise` 对象，webpack 也会将这个组件划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心组件的使用。
 
-由于返回的是 `Promise` 对象，无法与 `Route` 组件直接使用，为了讲解简单，直接推荐第二种方法，使用第三方包。
+由于返回的是 `Promise` 对象，无法与 `Route` 组件直接使用，为了讲解简单，直接推荐第二种方法，使用第三方包。（原文 [Code Splitting in Create React App](https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html) ）
 
 ##### 1.安装 `react-loadable`
 
