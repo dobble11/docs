@@ -17,7 +17,7 @@
 
 webpack 是一个现代 JavaScript 应用程序的静态模块打包器，webpack 会从入口开始处理应用程序，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。
 
-由于 webpack 自身只能理解 JavScript，loader 将各种类型文件转换成 webpack 能够处理的有效模块，这也正是 webpack 的强大扩展能力。
+loader 将各种类型文件转换成 webpack 能够处理的有效模块（由于 webpack 自身只能理解 JavScript），这也正是 webpack 的强大扩展能力。
 
 > 在 webpack 的配置中 loader 有两个重要属性：
 >
