@@ -161,7 +161,7 @@ module.exports = (env = {}) => ({
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         options: {
-          limit: 10000 // 限制转换base64的图片的文件大小不超过10K，否则由file-loader处理
+          limit: 10000 // 限制转换base64图片的文件大小不超过10K，否则由file-loader处理
         }
       },
       {
