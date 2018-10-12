@@ -274,13 +274,16 @@ npm i react-loadable
 -import Demo from './Demo';
 
 +const App = Loadable({
-+  loader: () => import('./App')
++  loader: () => import('./App'),
++  loading: () => null
 +});
 +const SignIn = Loadable({
-+  loader: () => import('./SignIn')
++  loader: () => import('./SignIn'),
++  loading: () => null
 +});
 +const Demo = Loadable({
-+  loader: () => import('./Demo')
++  loader: () => import('./Demo'),
++  loading: () => null
 +});
 
 ReactDOM.render(
