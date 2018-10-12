@@ -72,7 +72,7 @@ module.exports = (env, argv) => ({
 });
 ```
 
-- 导出为一个返回 Promise 的函数
+- 导出一个返回 Promise 的函数
 
 ```js
 module.exports = () =>
@@ -91,19 +91,19 @@ module.exports = () =>
 ```js
 module.exports = [
   {
+    entry: './app.js',
     output: {
       filename: './dist-amd.js',
       libraryTarget: 'amd'
     },
-    entry: './app.js',
     mode: 'production'
   },
   {
+    entry: './app.js',
     output: {
       filename: './dist-commonjs.js',
       libraryTarget: 'commonjs'
     },
-    entry: './app.js',
     mode: 'production'
   }
 ];
@@ -124,28 +124,32 @@ npm i -D html-webpack-plugin
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+//以下多个相同属性，只是为演示可接收的多种类型值，实际只需要选择一种
 module.exports = (env = {}) => ({
-  entry: 'index', //output file name默认为main
-  entry: ['one', 'two'], //output：main.js
+  entry: 'index', // output file name默认为main
+  entry: ['one', 'two'], // output：main.js
   entry: {
+    // 当为对象时，key作为文件名
     main: 'index',
     verdor: ['react', 'react-redux']
-  }, //output: main.js verdor.js
+  }, // output: main.js verdor.js
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'), // 输出目录
     filename: 'bundle.js',
-    filename: '[name].js?[hash:8]'
+    filename: '[name].js?[hash:8]',
+    chunkFilename: '[name].chunk.js?[hash:8]' // 代码分割的输出文件名，默认从0开始累加
   },
   module: {
     rules: [
-      // 模块规则（配置 loader、解析器等选项）
+      // 模块规则配置
+      // loader：用于处理的loader，需要使用多个loader使用use属性
+      // options：loader的配置选项
 
       {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          //loader配置选项
           presets: ['@babel/preset-env']
         }
       },
@@ -157,11 +161,11 @@ module.exports = (env = {}) => ({
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         options: {
-          limit: 10000
+          limit: 10000 //限制转换base64的图片的文件大小不超过10K，否则由file-loader处理
         }
       },
       {
-        loader: 'file-loader',
+        loader: 'file-loader', //只进行简单复制文件
         exclude: [/\.js$/, /\.html$/, /\.json$/],
         options: {
           name: 'dist/media/[name].[ext]?[hash:8]'
