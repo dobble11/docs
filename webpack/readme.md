@@ -161,7 +161,8 @@ module.exports = (env = {}) => ({
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         options: {
-          limit: 10000 // 限制转换base64图片的文件大小不超过10K，否则由file-loader处理
+          limit: 10000, // 限制转换base64图片的文件大小不超过10K，否则由file-loader处理
+          name: 'dist/media/[name].[ext]?[hash:8]' //用于file-loader选项
         }
       },
       {
@@ -219,7 +220,7 @@ module.exports = (env = {}) => ({
 +              fallback: {
 +                loader: 'style-loader',
 +                options: {
-+                  hmr: true
++                  hmr: false
 +                }
 +              },
 +              use: [
@@ -243,6 +244,8 @@ module.exports = (env = {}) => ({
   ]
 });
 ```
+
+> warn：由于 `ExtractTextPlugin` 插件不支持热替换，只适用于生产环境，为了不创建两个配置文件，我们可以通过创建一个立即执行函数，使用 `env.dev` 来达到区分目的，具体实现参考 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)
 
 ## 分割 js
 

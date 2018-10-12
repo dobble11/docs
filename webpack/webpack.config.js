@@ -22,30 +22,35 @@ module.exports = (env = {}) => ({
           },
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract({
-              fallback: {
-                loader: 'style-loader',
-                options: {
-                  hmr: true
-                }
-              },
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1,
-                    minimize: true
-                  }
-                }
-              ]
-            }),
+            use: (function() {
+              return env.dev
+                ? ['style-loader', 'css-loader']
+                : ExtractTextPlugin.extract({
+                    fallback: {
+                      loader: 'style-loader',
+                      options: {
+                        hmr: false
+                      }
+                    },
+                    use: [
+                      {
+                        loader: 'css-loader',
+                        options: {
+                          importLoaders: 1,
+                          minimize: true
+                        }
+                      }
+                    ]
+                  });
+            })(),
             exclude: /node_modules/
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: 'url-loader',
             options: {
-              limit: 10000
+              limit: 10000,
+              name: 'dist/media/[name].[ext]?[hash:8]'
             }
           },
           {
