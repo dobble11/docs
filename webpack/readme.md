@@ -126,12 +126,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 以下多个相同属性，只是为演示可接收的多种类型值，实际只需要选择一种
 module.exports = (env = {}) => ({
-  entry: 'index', // output file name默认为main
-  entry: ['one', 'two'], // output：main.js
+  entry: 'index.js', // output file name默认为main
+  entry: ['one.js', 'two.js'], // output：main.js
   entry: {
     // 当为对象时，key作为文件名
-    main: 'index',
-    verdor: ['react', 'react-redux']
+    main: 'index.js',
+    verdor: ['react', 'react-redux'] // 将第三方库打包进独立文件
   }, // output: main.js verdor.js
   output: {
     path: path.resolve(__dirname, 'dist'), // 输出目录
