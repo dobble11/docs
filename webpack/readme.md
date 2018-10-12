@@ -124,7 +124,7 @@ npm i -D html-webpack-plugin
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-//以下多个相同属性，只是为演示可接收的多种类型值，实际只需要选择一种
+// 以下多个相同属性，只是为演示可接收的多种类型值，实际只需要选择一种
 module.exports = (env = {}) => ({
   entry: 'index', // output file name默认为main
   entry: ['one', 'two'], // output：main.js
@@ -161,11 +161,11 @@ module.exports = (env = {}) => ({
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
         loader: 'url-loader',
         options: {
-          limit: 10000 //限制转换base64的图片的文件大小不超过10K，否则由file-loader处理
+          limit: 10000 // 限制转换base64的图片的文件大小不超过10K，否则由file-loader处理
         }
       },
       {
-        loader: 'file-loader', //只进行简单复制文件
+        loader: 'file-loader', // 只进行简单复制文件
         exclude: [/\.js$/, /\.html$/, /\.json$/],
         options: {
           name: 'dist/media/[name].[ext]?[hash:8]'
@@ -183,7 +183,7 @@ module.exports = (env = {}) => ({
     port: 80,
     stats: 'errors-only'
   },
-  devtool: env.dev ? '#eval-source-map' : '#source-map' //生产环境生成.map文件
+  devtool: env.dev ? '#eval-source-map' : '#source-map' // 生产环境生成.map文件
 });
 ```
 
@@ -295,3 +295,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+> 下一篇：[webpack 打包速度的优化方法](https://github.com/dobble11/docs/blob/master/webpack/%E6%B7%B1%E7%9B%AE2.x%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96%E6%96%B9%E6%A1%88.md)
