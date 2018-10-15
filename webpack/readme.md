@@ -168,8 +168,8 @@ module.exports = (env = {}) => ({
         }
       },
       {
-        loader: 'file-loader', // 只进行简单复制文件
         exclude: [/\.js$/, /\.html$/, /\.json$/],
+        loader: 'file-loader', // 只进行简单复制文件
         options: {
           name: 'dist/media/[name].[ext]?[hash:8]'
         }

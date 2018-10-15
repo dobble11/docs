@@ -53,8 +53,8 @@ module.exports = (env = {}) => ({
             }
           },
           {
-            loader: 'file-loader',
             exclude: [/\.js$/, /\.html$/, /\.json$/],
+            loader: 'file-loader',
             options: {
               name: 'dist/media/[name].[ext]?[hash:8]'
             }
