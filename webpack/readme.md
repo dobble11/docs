@@ -128,13 +128,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 以下多个相同属性，只是为演示可接收的多种类型值，实际只需要选择一种
 module.exports = (env = {}) => ({
-  entry: 'index.js', // output file name默认为main
+  entry: 'index.js', // output：main.js
   entry: ['one.js', 'two.js'], // output：main.js
   entry: {
     // 当为对象时，key作为文件名
-    main: 'index.js',
-    verdor: ['react', 'react-redux'] // 将第三方库打包进独立文件
-  }, // output: main.js verdor.js
+    one: 'one.js',
+    two: 'two.js'
+  }, // output: one.js two.js，如果两个js中引用相同模块，则会重复打包，可以将公共模块独立打包
   output: {
     path: path.resolve(__dirname, 'dist'), // 输出目录
     filename: 'bundle.js',
@@ -191,6 +191,10 @@ module.exports = (env = {}) => ({
 ```
 
 > 注：一个完整的配置的例子 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)，不包含代码分割
+
+##### 常用 loader
+
+##### 常用 plugin
 
 ## 分割 css
 
