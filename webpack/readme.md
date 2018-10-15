@@ -59,7 +59,7 @@ webpack 配置文件默认名为：`webpack.config.js` or `webpackfile.js` 也�
 - `-p`：设置 `process.env.NODE_ENV` 值为 `production` ，并会启用 `UglifyJSPlugin` 来压缩代码
 - `--progress`：打印打包进度
 - `--hide-modules`：折叠打印模块信息
-- `rimraf`：一个支持 cli 方式删除文件或文件夹得 node 包（安装 `npm i -D rimraf`）
+- `rimraf`：一个支持 cli 方式删除文件或文件夹的 node 包（安装 `npm i -D rimraf`）
 
 webpack 配置接收三种类型选项
 
@@ -258,7 +258,7 @@ module.exports = (env = {}) => ({
 > - 单个 js 文件过大
 > - 模块的按需加载，提高页面响应速度
 
-基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的向应速度。
+基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的响应速度。
 
 webpack 支持最新的 es 提案 `import()` 函数，这样导入的组件会返回一个 `Promise` 对象，webpack 也会将这个组件划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心组件的使用。
 
