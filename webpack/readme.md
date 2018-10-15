@@ -35,7 +35,7 @@ npm i -D webpack
 npm i -D webpack-dev-server
 ```
 
-如果你使用 webpack 4+ 版本，你还需要安装 CLI。
+如果你使用 webpack 4+ 版本，你还需要安装 CLI。（由于 webpack 4+ 后将 cli 部分分离成独立模块，通过 cli 方式调用需要安装，例如 react 通过 api 方式调用则不需要）
 
 ```sh
 npm install -D webpack-cli
@@ -52,12 +52,14 @@ webpack 配置文件默认名为：`webpack.config.js` or `webpackfile.js` 也�
   }
 ```
 
+- `start`：windows 命令，用于启动程序或打开文件
 - `--inline`：启用内联模式，当使用内联模式(inline mode)时，在开发工具(DevTools)的控制台(console)将显示消息，如：在重新加载之前，在一个错误之前，或者模块热替换(Hot Module Replacement)启用时。这可能显得很繁琐。
 - `--hot`：启用模块热替换
 - `--env.dev`：设置 `process.env.NODE_ENV` 值为 `development`
 - `-p`：设置 `process.env.NODE_ENV` 值为 `production` ，并会启用 `UglifyJSPlugin` 来压缩代码
 - `--progress`：打印打包进度
 - `--hide-modules`：折叠打印模块信息
+- `rimraf`：一个支持 cli 方式删除文件或文件夹得 node 包（安装 `npm i -D rimraf`）
 
 webpack 配置接收三种类型选项
 
@@ -245,7 +247,7 @@ module.exports = (env = {}) => ({
 });
 ```
 
-> warn：由于 `ExtractTextPlugin` 插件不支持热替换，只适用于生产环境，为了不创建两个配置文件，我们可以通过创建一个立即执行函数，使用 `env.dev` 来达到区分目的，具体实现参考 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)
+> warn：由于 `ExtractTextPlugin` 插件只适用于生产环境不支持热替换，如果不想创建两个配置文件，我们可以通过 `env.dev` 来达到区分开发与生产，具体实现参考 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)
 
 ## 分割 js
 

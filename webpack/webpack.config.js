@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (env = {}) => ({
   entry: './src/index.js',
@@ -22,27 +23,25 @@ module.exports = (env = {}) => ({
           },
           {
             test: /\.css$/,
-            use: (function() {
-              return env.dev
-                ? ['style-loader', 'css-loader']
-                : ExtractTextPlugin.extract({
-                    fallback: {
-                      loader: 'style-loader',
+            use: env.dev
+              ? ['style-loader', 'css-loader']
+              : ExtractTextPlugin.extract({
+                  fallback: {
+                    loader: 'style-loader',
+                    options: {
+                      hmr: false
+                    }
+                  },
+                  use: [
+                    {
+                      loader: 'css-loader',
                       options: {
-                        hmr: false
+                        importLoaders: 1,
+                        minimize: true
                       }
-                    },
-                    use: [
-                      {
-                        loader: 'css-loader',
-                        options: {
-                          importLoaders: 1,
-                          minimize: true
-                        }
-                      }
-                    ]
-                  });
-            })(),
+                    }
+                  ]
+                }),
             exclude: /node_modules/
           },
           {
@@ -70,7 +69,12 @@ module.exports = (env = {}) => ({
     }),
     new ExtractTextPlugin({
       filename: '[name].css?[hash:8]'
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'public'
+      }
+    ])
   ],
   devServer: {
     host: '127.0.0.1',
