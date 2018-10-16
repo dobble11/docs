@@ -193,7 +193,7 @@ module.exports = (env = {}) => ({
 
 > 注：一个完整的配置的例子 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)，不包含代码分割
 
-##### 常用 loader
+### 常用 loader
 
 - [`babel-loader`](https://www.webpackjs.com/loaders/babel-loader) 加载 ES2015+ 代码，然后使用 [Babel](https://babeljs.io/) 转译为 ES5
 - [`url-loader`](https://www.webpackjs.com/loaders/url-loader)如果文件小于限制返回 data URL，否则使用 file-loader 处理
@@ -203,7 +203,7 @@ module.exports = (env = {}) => ({
 
 更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
 
-##### 常用 plugin
+### 常用 plugin
 
 ## 分离 css
 
