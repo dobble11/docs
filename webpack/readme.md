@@ -199,9 +199,9 @@ module.exports = (env = {}) => ({
 - [`url-loader`](https://www.webpackjs.com/loaders/url-loader)如果文件小于限制返回 data URL，否则使用 file-loader 处理
 - [`file-loader`](https://www.webpackjs.com/loaders/file-loader) 将文件发送到输出文件夹，并返回（相对）URL
 - [`style-loader`](https://www.webpackjs.com/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
-- [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 CSS 文件后，使用 import 加载，并且返回 CSS 代码
+- [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 import 加载的 CSS 文件，并且返回 CSS 代码
 
-> 更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
+更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
 
 ##### 常用 plugin
 
