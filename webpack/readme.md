@@ -219,7 +219,7 @@ webpack 默认将 css 打包进 js 中，当不使用 js 完全控制渲染时�
 npm i -D extract-text-webpack-plugin
 ```
 
-> 如果使用 webpack 4+版本，需要安装 `npm i -D extract-text-webpack-plugin@next` 作为替换
+> 如果使用 webpack 4+版本，需要安装 `npm i -D extract-text-webpack-plugin@next` 作为替换，也可以使用更轻量级，基于 4+实现的插件 [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 ##### 2.修改 `webpack.config.js` 配置文件
 
