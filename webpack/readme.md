@@ -5,7 +5,7 @@
 - [核心概念](#核心概念)
 - [开始](#开始)
 - [常用配置](#常用配置)
-- [分割 css](#分割-css)
+- [分离 css](#分离-css)
 - [分割 js（代码分割）](#分割-js)
 
 ## 核心概念
@@ -195,9 +195,17 @@ module.exports = (env = {}) => ({
 
 ##### 常用 loader
 
+- [`babel-loader`](https://www.webpackjs.com/loaders/babel-loader) 加载 ES2015+ 代码，然后使用 [Babel](https://babeljs.io/) 转译为 ES5
+- [`url-loader`](https://www.webpackjs.com/loaders/url-loader)如果文件小于限制返回 data URL，否则使用 file-loader 处理
+- [`file-loader`](https://www.webpackjs.com/loaders/file-loader) 将文件发送到输出文件夹，并返回（相对）URL
+- [`style-loader`](https://www.webpackjs.com/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
+- [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 CSS 文件后，使用 import 加载，并且返回 CSS 代码
+
+> 更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
+
 ##### 常用 plugin
 
-## 分割 css
+## 分离 css
 
 webpack 默认将 css 打包进 js 中，当不使用 js 完全控制渲染时，就会带来一些问题：
 
