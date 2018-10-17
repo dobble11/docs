@@ -205,22 +205,18 @@ module.exports = (env = {}) => ({
 
 #### 常用 plugin
 
-| Name                                                                                            | Description                                         |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| [`CommonsChunkPlugin`](https://www.webpackjs.com/plugins/commons-chunk-plugin)                  | 提取 chunks 之间共享的通用模块                      |
-| [`CopyWebpackPlugin`](https://www.webpackjs.com/plugins/copy-webpack-plugin)                    | 将单个文件或整个目录复制到构建目录                  |
-| [`DefinePlugin`](https://www.webpackjs.com/plugins/define-plugin)                               | 允许在编译时(compile time)配置的全局常量            |
-| [`DllPlugin`](https://www.webpackjs.com/plugins/dll-plugin)                                     | 为了极大减少构建时间，进行分离打包                  |
-| [`ExtractTextWebpackPlugin`](https://www.webpackjs.com/plugins/extract-text-webpack-plugin)     | 从 bundle 中提取文本（CSS）到单独的文件             |
-| [`HotModuleReplacementPlugin`](https://www.webpackjs.com/plugins/hot-module-replacement-plugin) | 启用模块热替换(Enable Hot Module Replacement - HMR) |
-| [`HtmlWebpackPlugin`](https://www.webpackjs.com/plugins/html-webpack-plugin)                    | 简单创建 HTML 文件，用于服务器访问                  |
-| [`I18nWebpackPlugin`](https://www.webpackjs.com/plugins/i18n-webpack-plugin)                    | 为 bundle 增加国际化支持                            |
-| [`IgnorePlugin`](https://www.webpackjs.com/plugins/ignore-plugin)                               | 从 bundle 中排除某些模块                            |
-| [`LimitChunkCountPlugin`](https://www.webpackjs.com/plugins/limit-chunk-count-plugin)           | 设置 chunk 的最小/最大限制，以微调和控制 chunk      |
-| [`MinChunkSizePlugin`](https://www.webpackjs.com/plugins/min-chunk-size-plugin)                 | 确保 chunk 大小超过指定限制                         |
-| [`NpmInstallWebpackPlugin`](https://www.webpackjs.com/plugins/npm-install-webpack-plugin)       | 在开发时自动安装缺少的依赖                          |
-| [`ProvidePlugin`](https://www.webpackjs.com/plugins/provide-plugin)                             | 不必通过 import/require 使用模块                    |
-| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)            | 可以控制项目中 UglifyJS 的版本                      |
+| Name                                                                                        | Description                              |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| [`CommonsChunkPlugin`](https://www.webpackjs.com/plugins/commons-chunk-plugin)              | 提取 chunks 之间共享的通用模块           |
+| [`CopyWebpackPlugin`](https://www.webpackjs.com/plugins/copy-webpack-plugin)                | 将单个文件或整个目录复制到构建目录       |
+| [`DefinePlugin`](https://www.webpackjs.com/plugins/define-plugin)                           | 允许在编译时(compile time)配置的全局常量 |
+| [`DllPlugin`](https://www.webpackjs.com/plugins/dll-plugin)                                 | 为了极大减少构建时间，进行分离打包       |
+| [`ExtractTextWebpackPlugin`](https://www.webpackjs.com/plugins/extract-text-webpack-plugin) | 从 bundle 中提取文本（CSS）到单独的文件  |
+| [`HtmlWebpackPlugin`](https://www.webpackjs.com/plugins/html-webpack-plugin)                | 简单创建 HTML 文件，用于服务器访问       |
+| [`I18nWebpackPlugin`](https://www.webpackjs.com/plugins/i18n-webpack-plugin)                | 为 bundle 增加国际化支持                 |
+| [`IgnorePlugin`](https://www.webpackjs.com/plugins/ignore-plugin)                           | 从 bundle 中排除某些模块                 |
+| [`ProvidePlugin`](https://www.webpackjs.com/plugins/provide-plugin)                         | 不必通过 import/require 使用模块         |
+| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)        | 可以控制项目中 UglifyJS 的版本           |
 
 更多第三方插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表.
 
