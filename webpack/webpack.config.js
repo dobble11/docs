@@ -7,7 +7,8 @@ module.exports = (env = {}) => ({
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: env.dev ? '[name].js' : '[name].js?[hash:8]'
+    filename: env.dev ? '[name].js' : '[name].js?[hash:8]',
+    chunkFilename: env.dev ? '[name].chunk.js' : '[name].chunk.js?[hash:8]'
   },
   module: {
     rules: [
@@ -18,7 +19,9 @@ module.exports = (env = {}) => ({
             exclude: /node_modules/,
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              cacheDirectory: true,
+              presets: ['@babel/preset-env'],
+              plugins: ['syntax-dynamic-import'] // polyfill import()
             }
           },
           {
@@ -62,7 +65,8 @@ module.exports = (env = {}) => ({
       template: './src/index.html'
     }),
     new ExtractTextPlugin({
-      filename: '[name].css?[hash:8]'
+      filename: '[name].css?[hash:8]',
+      disable: env.dev ? true : false
     }),
     new CopyWebpackPlugin([
       {

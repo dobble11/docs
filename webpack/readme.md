@@ -152,6 +152,7 @@ module.exports = (env = {}) => ({
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
+          cacheDirectory: true,
           presets: ['@babel/preset-env']
         }
       },
@@ -191,7 +192,7 @@ module.exports = (env = {}) => ({
 });
 ```
 
-> 注：一个完整的配置的例子 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)，不包含代码分割
+> 注：一个完整的配置的例子 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)
 
 #### 常用 loader
 
