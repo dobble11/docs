@@ -288,7 +288,7 @@ module.exports = (env = {}) => ({
 
 基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的响应速度。
 
-webpack 支持最新的 es 提案 [`import()`](http://es6.ruanyifeng.com/#docs/module#import) 函数，这种方式导入的模块会返回一个 `Promise` 对象，webpack 也会以此为分割点来划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心模块的使用。
+webpack 支持最新的 es 提案 [`import()`](http://es6.ruanyifeng.com/#docs/module#import) 函数，这种方式导入的模块会返回一个 `Promise` 对象，webpack 也会以此为分割点来划分 js 块，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心模块的使用。
 
 由于返回的是 `Promise` 对象，无法与 `Route` 组件直接使用，为了讲解简单，直接推荐第二种方法，使用第三方包。（原文 [Code Splitting in Create React App](https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html) ）
 
