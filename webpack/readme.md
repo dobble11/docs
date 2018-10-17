@@ -205,6 +205,28 @@ module.exports = (env = {}) => ({
 
 #### 常用 plugin
 
+| Name | Description |
+| ---- | ----------- |
+
+
+| [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin) | 提取 chunks 之间共享的通用模块|
+| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin) | 将单个文件或整个目录复制到构建目录 |
+| [`DefinePlugin`](/plugins/define-plugin) | 允许在编译时(compile time)配置的全局常量 |
+| [`DllPlugin`](/plugins/dll-plugin) | 为了极大减少构建时间，进行分离打包 |
+| [`EnvironmentPlugin`](/plugins/environment-plugin) | [`DefinePlugin`](./define-plugin) 中 `process.env` 键的简写方式。 |
+| [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) | 从 bundle 中提取文本（CSS）到单独的文件 |
+| [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) | 启用模块热替换(Enable Hot Module Replacement - HMR) |
+| [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) | 简单创建 HTML 文件，用于服务器访问 |
+| [`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin) | 为 bundle 增加国际化支持 |
+| [`IgnorePlugin`](/plugins/ignore-plugin) | 从 bundle 中排除某些模块 |
+| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin) | 设置 chunk 的最小/最大限制，以微调和控制 chunk |
+| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin) | 确保 chunk 大小超过指定限制 |
+| [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | 在开发时自动安装缺少的依赖 |
+| [`ProvidePlugin`](/plugins/provide-plugin) | 不必通过 import/require 使用模块 |
+| [`UglifyjsWebpackPlugin`](/plugins/uglifyjs-webpack-plugin) | 可以控制项目中 UglifyJS 的版本 |
+
+更多第三方插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表。
+
 ## 分离 css
 
 webpack 默认将 css 打包进 js 中，当不使用 js 完全控制渲染时，就会带来一些问题：
@@ -232,7 +254,7 @@ module.exports = (env = {}) => ({
           {
              test: /\.css$/,
 +            loader: ExtractTextPlugin.extract({
-+              fallback: {
++              fallback: {  // 当不分离css时，使用该loader，也就是开发环境使用
 +                loader: 'style-loader',
 +                options: {
 +                  hmr: false
@@ -264,7 +286,7 @@ module.exports = (env = {}) => ({
 
 ## 分割 js
 
-正是由于 webpack 默认将所有模块打包进一个 js 文件中，导致单个 js 文件过大，加载当前页面不需要的 js 等问题，虽然可以通过设置 `entry` 为多个入口，将第三方包打包进独立的 js 文件中，`main.js` 中只包含业务代码，但随着项目业务的不断增多，还是无法解决单个 js 文件过大问题，这时正是代码分割的意义。
+正是由于 webpack 默认将所有模块打包进一个 js 文件中，导致单个 js 文件过大，加载当前页面不需要的 js 等问题，虽然可以通过设置 `entry` 为多个入口，将公共模块打包进独立的 js 文件中，`main.js` 中只包含业务代码，但随着项目业务的不断增多，还是无法解决单个 js 文件过大问题。
 
 > 代码分割能解决那些问题
 >
@@ -273,7 +295,7 @@ module.exports = (env = {}) => ({
 
 基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的响应速度。
 
-webpack 支持最新的 es 提案 `import()` 函数，这样导入的组件会返回一个 `Promise` 对象，webpack 也会将这个组件划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心组件的使用。
+webpack 支持最新的 es 提案 [`import()`](http://es6.ruanyifeng.com/#docs/module#import) 函数，这种方式导入的模块会返回一个 `Promise` 对象，webpack 也会以此为分割点来划分到独立 js 文件中，并由 webpack 来控制相应 js 文件的按需加载，我们只需要关心模块的使用。
 
 由于返回的是 `Promise` 对象，无法与 `Route` 组件直接使用，为了讲解简单，直接推荐第二种方法，使用第三方包。（原文 [Code Splitting in Create React App](https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html) ）
 

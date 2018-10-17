@@ -26,12 +26,6 @@ module.exports = (env = {}) => ({
             use: env.dev
               ? ['style-loader', 'css-loader']
               : ExtractTextPlugin.extract({
-                  fallback: {
-                    loader: 'style-loader',
-                    options: {
-                      hmr: false
-                    }
-                  },
                   use: [
                     {
                       loader: 'css-loader',
