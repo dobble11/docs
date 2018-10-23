@@ -204,7 +204,7 @@ module.exports = (env = {}) => ({
 
 #### 常用 plugin
 
-| Name                                                                                        | Description                                                                                                                                                                   |
+| 名称                                                                                        | 描述                                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`CommonsChunkPlugin`](https://www.webpackjs.com/plugins/commons-chunk-plugin)              | 内置，提取 chunks 之间共享的通用模块，4+ 版本移除，想要了解在最新版本中如何处理公共 chunk，请查看 [SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/) |
 | [`CopyWebpackPlugin`](https://www.webpackjs.com/plugins/copy-webpack-plugin)                | 将单个文件或整个目录复制到构建目录                                                                                                                                            |
