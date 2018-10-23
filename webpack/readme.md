@@ -215,7 +215,7 @@ module.exports = (env = {}) => ({
 | [`I18nWebpackPlugin`](https://www.webpackjs.com/plugins/i18n-webpack-plugin)                | 为 bundle 增加国际化支持                                                                                                                                                      |
 | [`IgnorePlugin`](https://www.webpackjs.com/plugins/ignore-plugin)                           | 内置，从 bundle 中排除某些模块                                                                                                                                                |
 | [`ProvidePlugin`](https://www.webpackjs.com/plugins/provide-plugin)                         | 内置，不必通过 import/require 使用模块                                                                                                                                        |
-| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)        | 内置，可以控制项目中 UglifyJS 的版本                                                                                                                                          |
+| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)        | 内置，用于压缩构建后的代码                                                                                                                                                    |
 
 更多第三方加载器和插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表.
 
