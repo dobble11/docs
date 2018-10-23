@@ -79,7 +79,7 @@ module.exports = (env = {}) => ({
     runtimeChunk: {
       name: 'manifest'
     },
-    minimizer: true, // [new UglifyJsPlugin({...})]
+    //minimizer: [new UglifyJsPlugin({...})]
     splitChunks: {
       chunks: 'async',
       minSize: 30000,
