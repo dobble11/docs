@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -72,7 +73,8 @@ module.exports = (env = {}) => ({
       {
         from: 'public'
       }
-    ])
+    ]),
+    new webpack.optimize.SplitChunksPlugin()
   ],
   devServer: {
     host: '127.0.0.1',
