@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -74,6 +75,37 @@ module.exports = (env = {}) => ({
       }
     ])
   ],
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest'
+    },
+    //minimizer: [new UglifyJsPlugin({...})]
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: false,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          priority: -10,
+          reuseExistingChunk: false,
+          test: /node_modules\/(.*)\.js/
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(scss|css)$/,
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        }
+      }
+    }
+  },
   devServer: {
     host: '127.0.0.1',
     port: 80,

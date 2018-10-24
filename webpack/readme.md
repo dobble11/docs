@@ -202,24 +202,22 @@ module.exports = (env = {}) => ({
 - [`style-loader`](https://www.webpackjs.com/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
 - [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 import 加载的 CSS 文件，并且返回 CSS 代码
 
-更多第三方 loader，查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders) 列表。
-
 #### 常用 plugin
 
-| Name                                                                                        | Description                              |
-| ------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| [`CommonsChunkPlugin`](https://www.webpackjs.com/plugins/commons-chunk-plugin)              | 提取 chunks 之间共享的通用模块           |
-| [`CopyWebpackPlugin`](https://www.webpackjs.com/plugins/copy-webpack-plugin)                | 将单个文件或整个目录复制到构建目录       |
-| [`DefinePlugin`](https://www.webpackjs.com/plugins/define-plugin)                           | 允许在编译时(compile time)配置的全局常量 |
-| [`DllPlugin`](https://www.webpackjs.com/plugins/dll-plugin)                                 | 为了极大减少构建时间，进行分离打包       |
-| [`ExtractTextWebpackPlugin`](https://www.webpackjs.com/plugins/extract-text-webpack-plugin) | 从 bundle 中提取文本（CSS）到单独的文件  |
-| [`HtmlWebpackPlugin`](https://www.webpackjs.com/plugins/html-webpack-plugin)                | 简单创建 HTML 文件，用于服务器访问       |
-| [`I18nWebpackPlugin`](https://www.webpackjs.com/plugins/i18n-webpack-plugin)                | 为 bundle 增加国际化支持                 |
-| [`IgnorePlugin`](https://www.webpackjs.com/plugins/ignore-plugin)                           | 从 bundle 中排除某些模块                 |
-| [`ProvidePlugin`](https://www.webpackjs.com/plugins/provide-plugin)                         | 不必通过 import/require 使用模块         |
-| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)        | 可以控制项目中 UglifyJS 的版本           |
+| 名称                                                                                        | 描述                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`CommonsChunkPlugin`](https://www.webpackjs.com/plugins/commons-chunk-plugin)              | 内置，提取 chunks 之间共享的通用模块，4+ 版本移除，想要了解在最新版本中如何处理公共 chunk，请查看 [optimization.splitChunks](https://webpack.js.org/plugins/split-chunks-plugin) |
+| [`UglifyjsWebpackPlugin`](https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin)        | 内置，用于压缩构建后的代码，4+ 版本后变更，请查看 [optimization.minimizer](https://webpack.js.org/plugins/uglifyjs-webpack-plugin)                                               |
+| [`DefinePlugin`](https://www.webpackjs.com/plugins/define-plugin)                           | 内置，允许在编译时(compile time)配置的全局常量                                                                                                                                   |
+| [`DllPlugin`](https://www.webpackjs.com/plugins/dll-plugin)                                 | 内置，为了极大减少构建时间，进行分离打包                                                                                                                                         |
+| [`IgnorePlugin`](https://www.webpackjs.com/plugins/ignore-plugin)                           | 内置，从 bundle 中排除某些模块                                                                                                                                                   |
+| [`ProvidePlugin`](https://www.webpackjs.com/plugins/provide-plugin)                         | 内置，不必通过 import/require 使用模块                                                                                                                                           |
+| [`CopyWebpackPlugin`](https://www.webpackjs.com/plugins/copy-webpack-plugin)                | 将单个文件或整个目录复制到构建目录                                                                                                                                               |
+| [`ExtractTextWebpackPlugin`](https://www.webpackjs.com/plugins/extract-text-webpack-plugin) | 从 bundle 中提取文本（CSS）到单独的文件，4+ 版本不兼容                                                                                                                           |
+| [`HtmlWebpackPlugin`](https://www.webpackjs.com/plugins/html-webpack-plugin)                | 简单创建 HTML 文件，用于服务器访问                                                                                                                                               |
+| [`I18nWebpackPlugin`](https://www.webpackjs.com/plugins/i18n-webpack-plugin)                | 为 bundle 增加国际化支持                                                                                                                                                         |
 
-更多第三方插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表.
+更多第三方加载器和插件，请查看 [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#webpack-plugins) 列表.
 
 ## 分离 css
 
@@ -285,9 +283,9 @@ module.exports = (env = {}) => ({
 > 代码分割能解决那些问题
 >
 > - 单个 js 文件过大
-> - 模块的按需加载，提高页面响应速度
+> - 模块的按需加载，提升页面加载速度
 
-基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，来提高页面的响应速度。
+基于路由将各个组件打包进独立的 js 文件中，不仅可以减小主 js 文件的大小，还可以避免加载不必要的组件，提升页面加载速度。
 
 webpack 支持最新的 es 提案 [`import()`](http://es6.ruanyifeng.com/#docs/module#import) 函数，这种方式导入的模块会返回一个 `Promise` 对象，webpack 也会以此为分割点来划分 js 块，并由 webpack 来负责相应 js 文件的按需加载，我们只需要关心模块的使用。
 
