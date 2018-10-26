@@ -25,26 +25,26 @@ ESLint 插件化的js代码检测工具：
 
 > 安装：
 >
-> ```javascript
+> ```sh
 > npm install -g eslint
 > ```
 >
 > 设置配置文件：
 >
-> ```javascript
+> ```sh
 > eslint --init
 > ```
 >
 > 文件或者项目运行eslint
 >
-> ```javascript
+> ```sh
 > eslint xxx.js
 > ```
 
 栗子：
 
 ```javascript
-//test-eslint.js
+//test-eslint.js + lib/demo.js + lib/demo.test.js
 var infoObj=[{name:"张三",age:30},
              {name:"李四",age:20},
              {name:"王五",age:40}
@@ -63,7 +63,7 @@ console.log(sortObj);
 
 package.json内`eslintConfig`：
 
-```javascript
+```diff
 {
   "name": "eslint-test",
   "version": "1.0.0",
@@ -77,14 +77,14 @@ package.json内`eslintConfig`：
   "devDependencies": {
     ...
   },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-        "node": true
-    },
-    "rules": {
-        "no-console": "off"
-    },
++  "eslintConfig": {
++    "extends": "eslint:recommended",
++    "env": {
++        "node": true
++    },
++    "rules": {
++        "no-console": "off"
++    },
     ...
   }
 }
@@ -113,7 +113,7 @@ module.exports = {
         "eslint:recommended",
         "prettier"
     ],
-    parserOptions: {
+    parserOptions: {	//指定校验的ecma的版本,及ecma的一些特性
         ecmaVersion: 6,     //指定ECMAScript支持的版本，6为ES6
         sourceType: "module", //指定来源的类型，有两种”script”或”module”
         ecmaFeatures: {     //想使用的额外的语言特性
@@ -153,22 +153,23 @@ module.exports = {
 
 ```javascript
  rules: {                            //启用的规则及其各自的错误级别
-        'no-console': 'off',            //启用 console
-        'eqeqeq':'error',                //要求使用 === 和 !==
-        'no-return-assign':'error',      //禁止 return 一个赋值表达式
-        'no-constant-condition':'error', //禁止在 if/while/for 等判断条件中出现永远不变的判断结果
-        'no-empty':'error',              //禁止出现空代码块，比如 if/else/for/catch 等代码块都在报警之列
-        'no-empty-function':'error',     //禁止出现空函数
-        'valid-jsdoc':'error',          //强制使用有效JSDoc注释,参数，返回
-        'no-fallthrough':'error',       //禁止case落空，在 switch/case 语句中出现了穿透特性     
-        'no-param-reassign':'error',     //禁止对 function 的参数进行重新赋值
-        'for-direction':'error',        //禁止 for 循环出现方向错误的循环，比如 for (i = 0; i < 10; i--)
-        'getter-return':'error',        //getter 必须有返回值，并且禁止返回空或者return;
-        'curly':'error',                //if 后面必须要有 {，除非是单行 if
-        'dot-location':'error',         //链式调用的时候，点号必须放在第二行开头处，禁止放在第一行结尾处
-        'no-floating-decimal':'warn',   //表示小数时，禁止省略 0，比如 .1
-        'no-redeclare':'error',         //禁止重复定义变量
-        'no-label-var':'error',         //禁止 label 名称与定义过的变量重复
+        'no-console': 'off',            // 启用 console
+        'eqeqeq':'error',                // 要求使用 === 和 !==
+        'no-return-assign':'error',      // 禁止 return 一个赋值表达式
+        'no-constant-condition':'error', // 禁止在 if/while/for 等判断条件中出现永远不变的判断结果
+        'no-empty':'error',              // 禁止出现空代码块，比如 if/else/for/catch 等代码块都在报警之列
+        'no-empty-function':'error',     // 禁止出现空函数 1
+        'valid-jsdoc':'warn',          // 强制使用有效JSDoc注释,参数，返回
+        'no-fallthrough':'error',       // 禁止case落空，在 switch/case 语句中出现了穿透特性
+        'no-param-reassign':'error',     // 禁止对 function 的参数进行重新赋值
+        'for-direction':'error',        // 禁止 for 循环出现方向错误的循环，比如 for (i = 0; i < 10; i--) 1
+        'getter-return':'error',        // getter 必须有返回值，并且禁止返回空或者return; 1
+        'no-unused-vars':'error',				// 定义过的变量必须使用 1
+        'curly':'error',                // if 后面必须要有 {，除非是单行 if 1
+        'dot-location':'error',         // 链式调用的时候，点号必须放在第二行开头处，禁止放在第一行结尾处
+        'no-floating-decimal':'warn',   // 表示小数时，禁止省略 0，比如 .1
+        'no-redeclare':'error',         // 禁止重复定义变量 1
+        'no-label-var':'error',         // 禁止 label 名称与定义过的变量重复
     },
 ```
 
@@ -189,12 +190,12 @@ prettier 的检查规则是通过配置文件`.prettierrc` 实现的，不过一
 
 ```javascript
 {
-    "semi": true,
-    "singleQuote": true,
-    "arrowParens": "avoid",
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": true
+    "semi": true,				//启用 句尾分号
+    "singleQuote": true,		//字符串使用单引号
+    "arrowParens": "avoid",		//避免箭头函数括号出现  例如单个参数不要括号 （a）=> {} 转换 a => {}
+    "printWidth": 80,			//单行字符最大个数
+    "tabWidth": 2,				//tab宽度为2个字符  当useTabs为false时，用2个空格填充，而不是单个tab字符
+    "useTabs": true				//是否禁用 tab
 }
 //更详细的配置项，请看https://prettier.io/docs/en/configuration.html
 ```
@@ -217,42 +218,198 @@ insert_final_newline = true	 //文件以一个空白行结尾
 trim_trailing_whitespace = true //表示会除去换行行首的任意空白字符
 ```
 
+### stylelint样式校验
+
+> stylelint拥有超过150条的规则，包括捕捉错误、最佳实践、控制可以使用的语言特性和强制代码风格规范。它支持最新的CSS语法，并且灵活可配置
+
+##### 安装与配置
+
+安装依赖
+
+```sh
+npm install --save-dev stylelint 
+stylelint-config-standard 
+stylelint-order 	
+stylelint-prettier
+stylelint-config-css-modules
+stylelint-config-prettier
+stylelint-selector-bem-pattern
+```
+
+根目录下创建.stylelintrc配置文件
+
+```javascript
+// .stylelintrc.js
+module.exports = {
+	extends: [
+		'stylelint-config-standard',
+		"stylelint-config-css-modules",
+		"stylelint-prettier/recommended"
+	],
+	plugins: [
+		'stylelint-order',  // 指定事物的顺序，例如声明块（插件包）中的属性。
+		'stylelint-prettier', 	//运用prettier
+		"stylelint-selector-bem-pattern"  //为选择器指定BEM模式
+	],
+	rules: {
+		"prettier/prettier": true,
+        "color-hex-case":"lower",
+        "color-no-invalid-hex":true,	//禁止无效十六进制颜色
+        "function-calc-no-unspaced-operator":true,	//禁止calc函数内的没有空格运算符
+		"at-rule-no-unknown": null,
+		"no-descending-specificity": null	//禁止在具有较高特异性的重叠选择子后出现较低特异性的选择子
+	}
+}
+```
+
+ [更多stylelint插件](https://stylelint.io/user-guide/plugins/)
+
+[更多stylelint规则](https://stylelint.io/user-guide/rules/)
+
+使用stylelint校验即可
+
+```sh
+stylelint 'src/**/*.css'
+```
+
+修复可以再package.json内npm scripts里加入命令
+
+```diff
+{
+  "name": "eslint-test",
+  "version": "1.0.0",
+  "description": "eslint-test",
+  "main": "test-eslint.js",
+  "scripts": {
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "prettier": "prettier --config .prettierrc src/**/*.{js,jsx,json,less,ts,tsx}",
+++   "lintcss": "stylelint 'src/**/*.less' --fix"
+  },
+  "author": "zhaomeiling",
+  "license": "ISC",
+  "devDependencies": {
+    ...
+  }
+    ...
+  }
+}
+```
+
+或者使用`lint-staged`(详细见本文档最后一段)
+
+### TSLint
+
+> TSLint是一种可扩展的静态分析工具，可检查[TypeScript](http://www.typescriptlang.org/)代码的可读性，可维护性和功能性错误。它在现代编辑器和构建系统中得到广泛支持，可以使用您自己的lint规则，配置和格式化程序进行自定义。
+>
+> 安装
+>
+> ```shell
+> npm install -g tslint typescript
+> ```
+>
+> 生成tslint（或者-i)
+>
+> ```shell
+> tslint --init
+> ```
+>
+> 校验(-c就是 --config， -fix修复)
+>
+> ```shell
+> tslint -c tslint.json 'src/**/*.tsx'
+> ```
+
+##### 配置
+
+tslint.json配置内容如下
+
+```javascript
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-console": false,
+    "object-literal-sort-keys": false,   // 检查对象文字中键的排序
+    "max-classes-per-file": [	// 文件不能包含超过指定数量的类
+      true,
+      5,
+      "exclude-class-expressions"
+    ],
+    "ordered-imports": false,   // 要求将import语句按照字母
+	"interface-name":false,	// 定义一个接口的名字必须是大写I开头
+	"no-any": true,	// 禁止类型是any
+        "no-for-in-array":true,	// 禁止对数组使用for in循环
+  },
+  "linterOptions": {
+    "exclude": [
+      "config/**/*.js",
+      "public/**/*.js",
+      "node_modules/**/*.ts"
+    ]
+  }
+}
+```
+
+[更多tslint规则]([TypeScript](http://www.typescriptlang.org/))
+
 ### lint-staged构建代码检查
 
-什么是lint-staged
+##### 什么是lint-staged
 
-针对暂存的文件运行linters
+针对暂存的文件运行linters，commit前依次执行写好的任务（ESLint 和 Prettier）
 
 ##### 安装和配置步骤
 
 > 安装依赖
 >
-> ```javascript
+> ```sh
 > npm install --save-dev lint-staged husky
 > ```
 >
 > 修改package.json配置
 >
-> ```javascript
+> ```diff
 > {
 >   "scripts": {
->     "precommit": "lint-staged"
+> +    "precommit": "lint-staged"
 >   },
->   "lint-staged": {
->     "src/**/*.js": [
->         "eslint",
->         "prettier --write",
->         "git add"
->     ]
->   }
+> + "lint-staged": {
+> +    "src/**/*.{js,vue,jsx}": [
+> +      "prettier --config .prettierrc --write",
+> +      "eslint",
+> +      "git add"
+> +    ],
+> +    "src/**/*.{ts,tsx}": [
+> +      "prettier --config .prettierrc --write",
+> +      "tslint",
+> +      "git add"
+> +    ],
+> +    "src/**/*.{css,scss,less}": [
+> +      "prettier --config .prettierrc --write",
+> +      "stylelint --fix",
+> +      "git add"
+> +    ]
+> +  }
 > }
 > ```
 >
-> 使用
->
->
 >
 >
 
+`"precommit": "lint-staged"`git commit时会执行这个命令，根据lint-staged配置进行校验。
 
+##### 原理
 
+在`git`中，我们每次执行`commit`、`push`等操作时，都会触发一个或多个`shell`脚本，这些脚本我们称为`钩子`，它们存放在`.git/hooks`目录下。
+
+- 前置（pre）钩子，在动作完成前调用
+- 后置（post）钩子，在动作完成后执行
+
+![](.\gitHook.png)
+
+在钩子里写入指令，执行git操作前先运行钩子里的指令，调用eslint和prettier检查代码，如果代码不符合规范就非零(warn,error)退出，git操作就会停止。
