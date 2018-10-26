@@ -1,16 +1,16 @@
 var infoObj=[
-            {
-                name:"张三",
-                age:30
-            },
-            {
-                name:"李四",
-                age:20
-            },
-            {
-                name:"王五",
-                age:40
-            }
+			{
+					name:"张三",
+					age:30
+			},
+			{
+					name:"李四",
+					age:20
+			},
+			{
+					name:"王五",
+					age:40
+			}
 ];
 //升序排列
 function compare(property){
@@ -21,13 +21,14 @@ function compare(property){
     }
 }
 var sortObj = infoObj.sort(compare("age"));
-console.log(sortObj); 
+console.log(sortObj);
 
 
 // no-empty-function -- 不允许函数穿透，有空函数;
 // function demo(){
 
 // }
+
 // for-direction -- 禁止 for 循环出现方向错误的循环
 for (let i = 0; i < 10; i--) {
     // do something
