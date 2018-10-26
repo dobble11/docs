@@ -50,3 +50,120 @@ var users = [
 #### 3.统一技术栈，避免同类型包引入
 
 ## webpack 配置优化
+
+开发环境应该避免不必要的 loader 与 plugin ，如 postcss，uglifyjs-webpack-plugin 等，只启用保证运行的工具。
+
+#### 1.移除不必要的 polyfill 与兼容 loader（适用 dev）
+
+```diff
+//webpack.config.dev.js
+module.exports = {
+  entry: [
+-   require.resolve('./polyfills')
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader',
+              'css-loader',
+-             'postcss-loader']
+      }
+    ]
+  }
+};
+```
+
+#### 2.DllPlugin 预编译与 IgnorePlugin 忽略语言文件打包（适用 dev 和 prod）
+
+可以通过 DllPlugin 插件将公共模块预编译，减少构建时间
+
+- 创建 config/webpack.config.dll.js 文件
+
+```js
+const path = require('path');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {
+  entry: {
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-dom',
+      'react-router-redux',
+      'redux',
+      'react-redux',
+      'redux-thunk',
+      'axios',
+      'react-intl-universal',
+      'antd'
+    ]
+  },
+  output: {
+    path: path.join(__dirname, 'public/static/js'), // 放在项目的static/js目录下面
+    filename: '[name].dll.js', // 打包文件的名字
+    library: '[name]_library' // 暴露出的全局变量名，需要与插件name对应
+  },
+  plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.DllPlugin({
+      path: path.join(__dirname, '[name]-manifest.json'), // 生成模块清单文件
+      name: '[name]_library'
+    })
+  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: true,
+        parallel: true,
+        uglifyOptions: {
+          output: {
+            comments: false,
+            beautify: false
+          },
+          compress: {
+            comparisons: false
+          },
+          warnings: false
+        }
+      })
+    ]
+  },
+  devtool: 'source-map'
+};
+```
+
+- 修改 package.json 的 scripts
+
+```diff
+  "scripts": {
++    "build:dll": "webpack --config config/webpack.config.dll.js -p"
+  }
+```
+
+运行 `npm run build:dll` 会在 config/ 下生成 vendor-manifest.json 打包清单文件，用于 DllReferencePlugin 插件忽略掉已预编译的模块，从而减少打包量。
+同时会在 public/static/js/ 下生成打包文件
+
+- 修改 dev 与 prod 的 webpack 配置文件
+
+```diff
+module.exports = {
+  plugins: [
++    new webpack.DllReferencePlugin({
++     manifest: require('./vendor-manifest.json')
++    })
+  ]
+};
+```
+
+- 修改 index.html 添加 dll 包的引用
+
+```diff
++  <script src="%PUBLIC_URL%/static/js/vendor.dll.js"></script>
+```
+
+> 注：如果报公共库找不到，先检查 public/static/js/vendor.dll.js 是否存在，否则先构建公共库 `npm run build:dll`，如果修改或升级预编译的模块也需要重新构建公共库
+
+## 升级 webpack 等构建工具

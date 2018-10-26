@@ -197,11 +197,12 @@ module.exports = (env = {}) => ({
 #### 常用 loader
 
 - [`babel-loader`](https://www.webpackjs.com/loaders/babel-loader) 加载 ES2015+ 代码，然后使用 [Babel](https://babeljs.io/) 转译为 ES5
-- [`url-loader`](https://www.webpackjs.com/loaders/url-loader)如果文件小于限制返回 data URL，否则使用 file-loader 处理
+- [`url-loader`](https://www.webpackjs.com/loaders/url-loader) 如果文件小于限制返回 data URL，否则使用 file-loader 处理
 - [`file-loader`](https://www.webpackjs.com/loaders/file-loader) 将文件发送到输出文件夹，并返回（相对）URL
 - [`style-loader`](https://www.webpackjs.com/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
 - [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 import 加载的 CSS 文件，并且返回 CSS 代码
-
+- [`postcss-loader`](https://github.com/postcss/postcss-loader) 将CSS转换成抽象语法树(AST)，可以通过各种插件对CSS进行转换，例如添加兼容前缀插件autoprefixer
+  
 #### 常用 plugin
 
 | 名称                                                                                        | 描述                                                                                                                                                                             |
