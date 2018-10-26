@@ -65,9 +65,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader',
+        use: [
+              'style-loader',
               'css-loader',
--             'postcss-loader']
+-             'postcss-loader'
+              ]
       }
     ]
   }
