@@ -32,16 +32,13 @@ loader 被用于转换某些类型的模块，而插件则可以用于执行范�
 
 ```sh
 npm i -D webpack
-
 npm i -D webpack-dev-server
-
 ```
 
 如果你使用 webpack 4+ 版本，你还需要安装 CLI。（由于 webpack 4+ 后将 cli 部分分离成独立模块，通过 cli 方式调用需要安装，例如 react 通过 api 方式调用则不需要）
 
 ```sh
 npm install -D webpack-cli
-
 ```
 
 webpack 配置文件默认名为：`webpack.config.js` or `webpackfile.js` 也可以通过 CLI 的 `--config xxx.js`设置
@@ -50,13 +47,9 @@ webpack 配置文件默认名为：`webpack.config.js` or `webpackfile.js` 也�
 
 ```json
   "scripts": {
-
     "start": "start chrome http://127.0.0.1 && webpack-dev-server --inline --hot --env.dev",
-
     "build": "rimraf dist && webpack -p --progress --hide-modules"
-
   }
-
 ```
 
 - `start`：windows 命令，用于启动程序或打开文件
@@ -76,13 +69,9 @@ webpack 配置接收三种类型选项
 
 ```js
 module.exports = (env, argv) => ({
-
   devtool: env.production ? 'source-maps' : 'eval';
-
   /* ... */
-
 });
-
 ```
 
 - 导出一个返回 Promise 的函数
@@ -128,9 +117,7 @@ module.exports = [
 
 ```sh
 npm i -D @babel/core @babel/preset-env babel-loader css-loader file-loader style-loader url-loader
-
 npm i -D html-webpack-plugin
-
 ```
 
 ##### 2.创建**webpack.cofig.js**文件
@@ -215,7 +202,7 @@ module.exports = (env = {}) => ({
 - [`style-loader`](https://www.webpackjs.com/loaders/style-loader) 将模块的导出作为样式添加到 DOM 中
 - [`css-loader`](https://www.webpackjs.com/loaders/css-loader) 解析 import 加载的 CSS 文件，并且返回 CSS 代码
 - [`postcss-loader`](https://github.com/postcss/postcss-loader) 将 CSS 转换成抽象语法树(AST)，然后通过各种插件对 CSS 进行转换，例如添加兼容前缀插件 autoprefixer
-
+  
 #### 常用 plugin
 
 | 名称                                                                                        | 描述                                                                                                                                                                             |
@@ -245,7 +232,6 @@ webpack 默认将 css 打包进 js 中，当不使用 js 完全控制渲染时�
 
 ```sh
 npm i -D extract-text-webpack-plugin
-
 ```
 
 > 如果使用 webpack 4+版本，需要安装 `npm i -D extract-text-webpack-plugin@next` 作为替换，也可以使用更轻量级，基于 4+实现的插件 [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
@@ -255,72 +241,38 @@ npm i -D extract-text-webpack-plugin
 ```diff
 + const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
-
 module.exports = (env = {}) => ({
-
   module: {
-
     rules: [
-
           {
-
              test: /\.css$/,
-
 +            loader: ExtractTextPlugin.extract({
-
 +              fallback: {  // 当不分离css时，使用该loader，也就是开发环境使用
-
 +                loader: 'style-loader',
-
 +                options: {
-
 +                  hmr: false
-
 +                }
-
 +              },
-
 +              use: [
-
 +                {
-
 +                  loader: 'css-loader',
-
 +                  options: {
-
 +                    importLoaders: 1,
-
 +                    minimize: true
-
 +                  }
-
 +                }
-
 +              ]
-
 +           }),
-
             exclude: /node_modules/
-
           }
-
     ]
-
   },
-
   plugins: [
-
 +    new ExtractTextPlugin({
-
 +      filename: '[name].css?[hash:8]'
-
 +    })
-
   ]
-
 });
-
 ```
 
 > warn：由于 `ExtractTextPlugin` 插件只适用于生产环境不支持热替换，如果不想创建两个配置文件，我们可以通过 `env.dev` 来达到区分开发与生产，具体实现参考 [`webpack.config.js`](https://github.com/dobble11/docs/blob/master/webpack/webpack.config.js)
@@ -344,70 +296,40 @@ webpack 支持最新的 es 提案 [`import()`](http://es6.ruanyifeng.com/#docs/m
 
 ```sh
 npm i react-loadable
-
 ```
 
 ##### 2.修改使用 `Route` 组件部分的引用
 
 ```diff
 +import Loadable from 'react-loadable';
-
 -import App from './App';
-
 -import SignIn from './SignIn';
-
 -import Demo from './Demo';
 
-
-
 +const App = Loadable({
-
 +  loader: () => import('./App'),
-
 +  loading: () => null
-
 +});
-
 +const SignIn = Loadable({
-
 +  loader: () => import('./SignIn'),
-
 +  loading: () => null
-
 +});
-
 +const Demo = Loadable({
-
 +  loader: () => import('./Demo'),
-
 +  loading: () => null
-
 +});
-
-
 
 ReactDOM.render(
-
   <Router>
-
     <div className="wraper">
-
       <Route exact path="/" component={App} />
-
       <Route path="/home" component={App} />
-
       <Route path="/demo" component={Demo} />
-
       <Route path="/signin" component={SignIn} />
-
     </div>
-
   </Router>,
-
   document.getElementById('root')
-
 );
-
 ```
 
 > 下一篇：[webpack 打包速度优化的方法](https://github.com/dobble11/docs/blob/master/webpack/webpack%E6%89%93%E5%8C%85%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96%E7%9A%84%E6%96%B9%E6%B3%95.md)
