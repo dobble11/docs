@@ -12,7 +12,7 @@ npm i -g node-gyp
 
 您还需要安装：
 
-### Unix
+### Linux
 
    * `python`（`v2.7` 推荐，`v3.x.x` 不支持）
    * `make`
