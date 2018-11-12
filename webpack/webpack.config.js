@@ -17,7 +17,6 @@ module.exports = (env = {}) => ({
         oneOf: [
           {
             test: /\.js$/,
-            exclude: /node_modules/,
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
@@ -39,8 +38,7 @@ module.exports = (env = {}) => ({
                       }
                     }
                   ]
-                }),
-            exclude: /node_modules/
+                })
           },
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
