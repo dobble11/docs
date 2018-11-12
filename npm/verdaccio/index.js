@@ -1,3 +1,3 @@
-import alert from 'if-alert';
+const alert = require('if-alert');
 
 alert(11);

@@ -4,7 +4,7 @@
   "description": "[Verdaccio](https://github.com/verdaccio/verdaccio) 是一个 Node.js 创建的轻量的私有 npm 代理注册服务",
   "main": "index.js",
   "dependencies": {
-    "if-alert": "^1.0.0",
+    "if-alert": "^1.0.5",
     "jquery": "^3.3.1"
   },
   "devDependencies": {},
