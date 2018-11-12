@@ -1,7 +1,7 @@
 {
   "name": "verdaccio",
   "version": "1.0.0",
-  "description": "[Verdaccio](https://github.com/verdaccio/verdaccio) 是一个 Node.js 创建的轻量的私有 npm 代理注册服务",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "if-alert": "0.0.1",
