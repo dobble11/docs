@@ -6,16 +6,51 @@ const yosay = require('yosay');
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the superb ${chalk.red('generator-yeoman')} generator!`)
-    );
+    this.log(yosay(`Welcome to the superb ${chalk.red('generator-yeoman')} generator!`));
 
     const prompts = [
       {
+        type: 'input',
+        name: 'appName',
+        message: 'Your project name',
+        default: this.appname
+      },
+      {
+        type: 'input',
+        name: 'author',
+        message: 'author',
+        default: this.user.git.name()
+      },
+      {
+        type: 'input',
+        name: 'authorEmail',
+        message: 'author email',
+        default: this.user.git.email()
+      },
+      {
         type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        name: 'lint',
+        message: 'Use ESLint to lint your code?'
+      },
+      {
+        name: 'ESlintStyle',
+        type: 'list',
+        message: 'Pick an ESLint preset',
+        when(answers) {
+          return answers.lint;
+        },
+        choices: [
+          {
+            name: 'Airbnb (https://github.com/airbnb/javascript)',
+            value: 'airbnb',
+            short: 'Airbnb'
+          },
+          {
+            name: 'Standard (https://github.com/feross/standard)',
+            value: 'standard',
+            short: 'Standard'
+          }
+        ]
       }
     ];
 

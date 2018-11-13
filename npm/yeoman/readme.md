@@ -2,7 +2,7 @@
 
 ## 什么是Yeoman
 
-> **示例**
+**示例**
 >
 > **目的：**
 >
@@ -18,64 +18,171 @@
 
 只要一段代码，Yeoman可以创建一个web应用程序或者模板。通过脚手架的方式来创建现代web应用。
 
-## 创建与安装--以react为例
+## 安装与使用
 
-> 步骤
->
-> 安装yeoman工具箱
->
-> ```shell
-> npm i -g yo
-> ```
->
-> 安装yeoman生成器(有超多开源可用的)
->
-> > 比如搭建react的常用生成器之一：generator-react-webpack
-> >
-> > ```shell
-> > npm i -g generator-react-webpack
-> > // 命令行创建或直接右键创建新的文件夹
-> > mkdir react-demo
-> > // 进入该文件夹 然后yo react-webpack即可
-> > cd react-demo
-> > yo react-webpack
-> > ```
-> >
-> > 三种方法构建react项目之一。利用yeoman搭建react，可以更**容易配置webpack**。
->
-> 也可以构建属于自己的脚手架
->
-> 比如安装生成器 generator-generator
->
-> ```shell
-> npm i -g generator-generator
-> // 命令行创建或直接右键创建新的文件夹
-> mkdir react-generator
-> // 进入该文件夹 然后yo react-webpack即可
-> cd react-generator
-> yo generator
-> ```
->
-> 安装后，可以看到其生成器的项目结构为：
->
-> ```sh
-> ├── .yo-rc.json
-> ├── package.json
-> ├── generators
-> │   ├── app
-> │       ├── templates
-> │           ├── dummyfile.txt
-> │       ├── index.js
-> ```
->
->
+安装yeoman工具箱
 
-## 如何创建个人脚手架
+```shell
+npm i -g yo
+```
 
-### 创建目录与修改
+安装yeoman生成器(有超多开源可用的)
 
-### 创建脚手架模板
+### react生成器
 
-### 增加子模板
+比如搭建react的常用生成器之一：`generator-react-webpack`
 
-## 发布
+```shell
+npm i -g generator-react-webpack
+// 命令行创建或直接右键创建新的文件夹
+mkdir react-demo
+// 进入该文件夹 然后yo react-webpack即可
+cd react-demo
+yo react-webpack
+```
+
+> 三种常用方法构建react项目之一。
+>
+> 利用yeoman搭建react，可以更**容易配置webpack**。
+
+### 定制前端脚手架
+
+也可以构建属于自己的脚手架
+
+比如安装生成器 generator-generator
+
+```shell
+npm i -g generator-generator
+// 命令行创建或直接右键创建新的文件夹
+mkdir react-generator
+// 进入该文件夹 然后yo react-webpack即可
+cd react-generator
+yo generator
+```
+
+安装后，可以看到其生成器的项目结构为：
+
+```sh
+├── .yo-rc.json
+├── package.json
+├── generators
+│   ├── app
+│       ├── templates
+│           ├── dummyfile.txt
+│       ├── index.js
+```
+
+`generators/app/templates/`是默认存放文件的目录，把所有模版文件放在这个目录下
+
+`/generators/app/index.js`是Yeoman的配置文件，定义如何生成我们的脚手架
+
+#### 配置
+
+每个generator都会继承`yeoman-generator`类，即上述的`generators/app/index.js`文件。
+
+> 该类有几个重要的生命周期节点：
+>
+> - `initializing` - 初始化方法，用于获取项目状态、配置等
+> - `prompting` - 调用[inquire](https://github.com/SBoudrias/Inquirer.js)方法获取用户输入（generator与用户交互的主要方式）
+> - `configuring` - 保存配置，创建 `.editorconfig` 等文件
+> - `writing` - 执行文件写操作，即项目文件写入文件系统中
+> - `install` - 执行安装操作，需调用 `this.installDependencies` 方法
+> - `end` - 最后执行，可清除临时文件等
+
+##### prompting
+
+```js
+// 这里，会将用户输入的结果配置到 this.props 对象中，方便后续访问。
+const prompts = [
+      {
+        type: 'input',
+        name: 'appName',
+        message: 'Your project name',
+        default: this.appname
+      },
+      {
+        type: 'input',
+        name: 'author',
+        message: 'author',
+        default: this.user.git.name()
+      },
+      {
+        type: 'input',
+        name: 'authorEmail',
+        message: 'author email',
+        default: this.user.git.email()
+      },
+      {
+        type: 'confirm',
+        name: 'lint',
+        message: 'Use ESLint to lint your code?'
+      },
+      {
+        name: 'ESlintStyle',
+        type: 'list',
+        message: 'Pick an ESLint preset',
+        when(answers) {
+          return answers.lint;
+        },
+        choices: [
+          {
+            name: 'Airbnb (https://github.com/airbnb/javascript)',
+            value: 'airbnb',
+            short: 'Airbnb'
+          },
+          {
+            name: 'Standard (https://github.com/feross/standard)',
+            value: 'standard',
+            short: 'Standard'
+          }
+        ]
+      },
+      ....
+    ];
+```
+
+##### writing
+
+
+
+### 
+
+#### 增加子模板
+
+yeoman可以添加子模板，方法只需要执行如下命令：
+
+```sh
+yo generator:subgenerator [name]
+```
+
+执行后可在原本生成器generators目录下看到该name的文件
+
+#### 试运行
+
+可以通过如下方式，将项目加入本地generator 库：
+
+```sh
+npm link
+```
+
+之后，就可以执行如下命令，生成手脚架:
+
+```sh
+yo [your template name]
+```
+
+#### 发布
+
+> 注意：
+>
+> 1. `generator-test/package.json`中的`name`要在<https://www.npmjs.com/>没被创建过，才可以发布。
+>
+> 2. 发布需要一个`npm`的账号，如果没有使用`npm adduser`创建；
+>
+> 3. 如果已有账号，运行`npm login`登陆。
+> 4. 使用`npm unpublish 包名`命令可以撤销发布，只有在发包的24小时内才允许撤销发布的包。
+
+```sh
+npm publish
+npm unpublish
+```
