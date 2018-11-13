@@ -10,10 +10,10 @@ Verdaccio 是一个 Node.js 创建的轻量的私有 npm 代理注册服务
 npm i -g verdaccio
 ```
 
-> 具备条件
->
-> 1. Node>6.12.0
-> 2. 安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
+**具备条件**
+
+1.  Node>6.12.0
+2.  安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
 
 #### 用法
 
@@ -27,17 +27,17 @@ npm i -g verdaccio
 
 现在打开地址 http://localhost:4873/ 将显示所有本地软件包
 
-> 注：通过 Verdaccio 代理访问包，需要修改 npm 配置 `registry`，有三种方法
->
-> 1. 项目根目录创建 .npmrc 文件，修改内容 `registry = "http://localhost:4873"` (推荐)
-> 2. CLI 运行`npm set registry http://localhost:4873`
-> 3. 所有 npm 命令内联 `--registry http://localhost:4873`
+通过 Verdaccio 代理访问包，需要修改 npm 配置 `registry`，有三种方法
+
+- 项目根目录创建 .npmrc 文件，修改内容 `registry = "http://localhost:4873"` (推荐)
+- CLI 运行`npm set registry http://localhost:4873`
+- 所有 npm 命令内联 `--registry http://localhost:4873`
 
 ## 发布与删除 npm 包
 
 > 以下命令都假设你已经修改 npm 注册服务地址为本地 Verdaccio 服务地址
 
-首先，添加用户
+首先，**添加用户**
 
 ```sh
 npm adduser
@@ -45,7 +45,7 @@ npm adduser
 
 运行以上命令，会提示输入用户名和密码，添加成功后会在用户的 npm 配置文件中生成相应 token
 
-发布你的包
+**发布你的包**
 
 ```sh
 npm publish
