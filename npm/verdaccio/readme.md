@@ -35,6 +35,22 @@ npm i -g verdaccio
 
 ## 发布 npm 包
 
+> 以下命令都假设你已经修改 npm 注册服务地址为本地 Verdaccio 服务地址
+
+首先，添加用户
+
+```sh
+npm adduser
+```
+
+运行以上命令，会提示输入用户名和密码，添加成功后会在用户的 npm 配置文件中生成相应 token
+
+发布你的包
+
+```sh
+npm publish
+```
+
 ## 常用配置
 
 ## 服务器配置
