@@ -4,8 +4,55 @@
 
 ## 开始
 
+##### 安装
+
+```sh
+npm i -g verdaccio
+```
+
+> 具备条件
+>
+> 1. Node>6.12.0
+> 2. 安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
+
+##### 用法
+
+```sh
+> verdaccio
+ warn --- config file  - C:\Users\intellif\AppData\Roaming\verdaccio\config.yaml
+ warn --- Plugin successfully loaded: htpasswd
+ warn --- Plugin successfully loaded: audit
+ warn --- http address - http://localhost:4873/ - verdaccio/3.8.5
+```
+
+现在打开地址 http://localhost:4873/ 将显示所有本地软件包
+
+> 注：通过 Verdaccio 代理访问包，需要修改 npm 配置，有三种方法
+>
+> 1. 项目根目录创建 .npmrc 文件，修改内容 `registry = "http://localhost:4873"` (推荐)
+> 2. CLI 运行`npm set registry http://localhost:4873`
+> 3. 所有 npm 命令内联 `--registry http://localhost:4873`
+
 ## 发布 npm 包
 
 ## 常用配置
 
 ## 服务器配置
+
+##### 保持 verdaccio 永远运行
+
+安装 PM2
+
+```sh
+$ sudo npm i -g pm2
+```
+
+> 警告：Verdaccio 当前不支持 PM2 的集群模式，使用集群模式运行它可能会导致未知行为。
+
+启动 Verdaccio
+
+```sh
+$ pm2 start verdaccio
+```
+
+> 由于 Verdaccio 默认监听的是 localhost，无法通过 ip 访问，可以通过设置 config.yaml 中的 `listen` 值为 `0.0.0.0:4873`
