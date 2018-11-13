@@ -12,8 +12,8 @@ npm i -g verdaccio
 
 **具备条件**
 
-1.  Node>6.12.0
-2.  安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
+1. Node>6.12.0
+2. 安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
 
 #### 用法
 
