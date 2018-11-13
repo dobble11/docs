@@ -33,7 +33,7 @@ npm i -g verdaccio
 > 2. CLI 运行`npm set registry http://localhost:4873`
 > 3. 所有 npm 命令内联 `--registry http://localhost:4873`
 
-## 发布 npm 包
+## 发布与删除 npm 包
 
 > 以下命令都假设你已经修改 npm 注册服务地址为本地 Verdaccio 服务地址
 
