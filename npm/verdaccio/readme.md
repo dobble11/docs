@@ -67,6 +67,61 @@ npm unpublish xxx@0.0.1
 
 ## 常用配置
 
+默认 config.yaml 文件，路径会在终端启动 Verdaccio 时输出
+
+```yaml
+# npm 包存放目录
+storage: ./storage
+# 插件存放目录
+plugins: ./plugins
+# 监听端口
+listen: localhost:4873 # default
+
+web:
+  # 默认启用 WebUI，如果要禁用它，只需取消注释下一行
+  #enable: false
+  title: Verdaccio # WebUI 标题
+
+auth:
+  htpasswd: # 默认授权插件，也就是使用 .npmrc 中生成的 token
+    file: ./htpasswd
+    # 允许注册的最大用户数，默认为 "+inf"
+    # 你可以将此值设置为 -1 以禁用注册
+    #max_users: 1000
+
+# 我们可以访问的仓库列表
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+
+# 对不同包访问权限进行控制，可选的值: "$all", "$anonymous", "$authenticated"
+packages:
+  '@*/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+
+  '**':
+    # 允许所有用户访问
+    access: $all
+
+    # 允许授权用户发布
+    publish: $authenticated
+
+    # 如果本地未找到包, 代理请求 'npmjs' registry
+    proxy: npmjs
+
+# 为了使用 `npm audit` 取消注释以下部分
+middlewares:
+  audit:
+    enabled: true
+
+# 日志设置，过滤记录的信息
+logs:
+  - { type: stdout, format: pretty, level: http }
+  #- {type: file, path: verdaccio.log, level: info}
+```
+
 ## 服务器配置
 
 #### 保持 Verdaccio 永远运行
