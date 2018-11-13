@@ -53,7 +53,7 @@ npm publish
 
 > Verdaccio 的发包流程恰好与下载包相反，会先检查 npm.org 上是否已存在该包名，存在则报错，可以在本地包名前加上特定前缀解决冲突。更新包时，也需要注意版本号的增加
 
-取消发布包，只会删除 `package.json` 中 `version` 对应版本包
+**取消发布包**，只会删除 `package.json` 中 `version` 对应版本包
 
 ```sh
 npm unpublish
