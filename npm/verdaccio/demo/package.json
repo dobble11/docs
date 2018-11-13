@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "if-alert": "0.0.1",
-    "jquery": "^3.3.1"
+    "if-alert": "0.0.1"
   },
   "devDependencies": {},
   "scripts": {
