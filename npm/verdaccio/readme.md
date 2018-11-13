@@ -1,6 +1,6 @@
 # Verdaccio
 
-[Verdaccio](https://github.com/verdaccio/verdaccio) 是一个 Node.js 创建的轻量的私有 npm 代理注册服务
+Verdaccio 是一个 Node.js 创建的轻量的私有 npm 代理注册服务
 
 ## 开始
 
