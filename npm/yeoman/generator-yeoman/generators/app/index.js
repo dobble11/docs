@@ -13,7 +13,13 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'appName',
         message: 'Your project name',
-        default: this.appname
+        default: 'test_demo'
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Your project description',
+        default: 'test des'
       },
       {
         type: 'input',
@@ -57,17 +63,34 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
+      this.log(chalk.red('this.props: ', this.props.appName));
+      this.log(chalk.green('name: ', this.props.appName));
     });
   }
 
   writing() {
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('intellif-demo'),
+      this.destinationPath(this.props.appName)
+    );
+    const currPackage = this.fs.readJSON(
+      this.destinationPath(this.props.appName + '/package.json'),
+      {}
+    );
+    currPackage.name = this.props.appName;
+    currPackage.author = this.props.author;
+    currPackage.description = this.props.description;
+    this.fs.writeJSON(
+      this.destinationPath(this.props.appName + '/package.json'),
+      currPackage
     );
   }
 
   install() {
     this.installDependencies();
+  }
+
+  end() {
+    this.fs.delete('.yo-rc.json'); // 删除无用的文件
   }
 };

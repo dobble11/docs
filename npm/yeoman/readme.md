@@ -76,72 +76,103 @@ yo generator
 
 `/generators/app/index.js`是Yeoman的配置文件，定义如何生成我们的脚手架
 
+
+
 #### 配置
 
 每个generator都会继承`yeoman-generator`类，即上述的`generators/app/index.js`文件。
 
-> 该类有几个重要的生命周期节点：
->
-> - `initializing` - 初始化方法，用于获取项目状态、配置等
-> - `prompting` - 调用[inquire](https://github.com/SBoudrias/Inquirer.js)方法获取用户输入（generator与用户交互的主要方式）
-> - `configuring` - 保存配置，创建 `.editorconfig` 等文件
-> - `writing` - 执行文件写操作，即项目文件写入文件系统中
-> - `install` - 执行安装操作，需调用 `this.installDependencies` 方法
-> - `end` - 最后执行，可清除临时文件等
+该类有几个重要的生命周期节点：
+
+| 函数         | 释义                                                         |
+| ------------ | ------------------------------------------------------------ |
+| initializing | 初始化方法，用于获取项目状态、配置                           |
+| prompting    | 调用[inquire](https://github.com/SBoudrias/Inquirer.js)方法获取用户输入（generator与用户交互的主要方式） |
+| configuring  | 保存配置，创建 `.editorconfig` 等文件                        |
+| writing      | 执行文件写操作，即项目文件写入文件系统中                     |
+| install      | 执行安装操作，需调用 `this.installDependencies` 方法         |
+| end          | 最后执行，可清除临时文件等                                   |
+
+
 
 ##### prompting
 
-```js
-// 这里，会将用户输入的结果配置到 this.props 对象中，方便后续访问。
+ prompting这里，会将用户输入的结果配置到 this.props 对象中，方便后续访问。
+
+```diff
 const prompts = [
-      {
-        type: 'input',
-        name: 'appName',
-        message: 'Your project name',
-        default: this.appname
-      },
-      {
-        type: 'input',
-        name: 'author',
-        message: 'author',
-        default: this.user.git.name()
-      },
-      {
-        type: 'input',
-        name: 'authorEmail',
-        message: 'author email',
-        default: this.user.git.email()
-      },
-      {
-        type: 'confirm',
-        name: 'lint',
-        message: 'Use ESLint to lint your code?'
-      },
-      {
-        name: 'ESlintStyle',
-        type: 'list',
-        message: 'Pick an ESLint preset',
-        when(answers) {
-          return answers.lint;
-        },
-        choices: [
-          {
-            name: 'Airbnb (https://github.com/airbnb/javascript)',
-            value: 'airbnb',
-            short: 'Airbnb'
-          },
-          {
-            name: 'Standard (https://github.com/feross/standard)',
-            value: 'standard',
-            short: 'Standard'
-          }
-        ]
-      },
-      ....
+-    {
+-      type: 'confirm',
+-      name: 'someAnswer',
+-      message: 'Would you like to enable this option?',
+-      default: true
+-    }
++      {
++        type: 'input',
++        name: 'appName',
++        message: 'Your project name',
++        default: this.appname
++      },
++      {
++        type: 'input',
++        name: 'author',
++        message: 'author',
++        default: this.user.git.name()
++      },
++      {
++        type: 'input',
++        name: 'authorEmail',
++        message: 'author email',
++        default: this.user.git.email()
++      },
++      {
++        type: 'confirm',
++        name: 'lint',
++        message: 'Use ESLint to lint your code?'
++      },
++      {
++        name: 'ESlintStyle',
++        type: 'list',
++        message: 'Pick an ESLint preset',
++        when(answers) {
++          return answers.lint;
++        },
++        choices: [
++          {
++            name: 'Airbnb (https://github.com/airbnb/javascript)',
++            value: 'airbnb',
++            short: 'Airbnb'
++          },
++          {
++            name: 'Standard (https://github.com/feross/standard)',
++            value: 'standard',
++            short: 'Standard'
++          }
++        ]
++      },
++      ....
     ];
 ```
 
 ##### writing
+
+```diff
+writing() {
+-    this.fs.copy(
+-      this.templatePath('dummyfile.txt'),
+-      this.destinationPath('dummyfile.txt')
+-    );
++    this.fs.copy(this.templatePath('intellif-demo'), this.destinationPath(this.appName));
++        const currPackage = this.fs.readJSON(
++          this.destinationPath(this.appName + '/package.json'),
++          {}
++        );
++        currPackage.name = this.appName;
++        currPackage.author = this.author;
++        currPackage.description = this.description;
++        this.fs.writeJSON(this.destinationPath(this.appName + '/package.json'), currPackage);
+  }
+```
 
 
 
