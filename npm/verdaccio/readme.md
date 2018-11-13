@@ -63,7 +63,7 @@ npm publish
 $ sudo npm i -g pm2
 ```
 
-> 警告：Verdaccio 当前不支持 PM2 的集群模式，使用集群模式运行它可能会导致未知行为。
+> 注：Verdaccio 当前不支持 PM2 的集群模式，使用集群模式运行它可能会导致未知行为。
 
 启动 Verdaccio
 
