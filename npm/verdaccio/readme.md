@@ -4,7 +4,7 @@ Verdaccio 是一个 Node.js 创建的轻量的私有 npm 代理注册服务
 
 ## 开始
 
-##### 安装
+#### 安装
 
 ```sh
 npm i -g verdaccio
@@ -15,7 +15,7 @@ npm i -g verdaccio
 > 1. Node>6.12.0
 > 2. 安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
 
-##### 用法
+#### 用法
 
 ```sh
 > verdaccio
@@ -69,7 +69,7 @@ npm unpublish xxx@0.0.1
 
 ## 服务器配置
 
-##### 保持 Verdaccio 永远运行
+#### 保持 Verdaccio 永远运行
 
 安装 PM2
 
