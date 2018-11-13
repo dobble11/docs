@@ -30,7 +30,7 @@ npm i -g verdaccio
 通过 Verdaccio 代理访问包，需要修改 npm 配置 `registry`，有三种方法
 
 - 项目根目录创建 .npmrc 文件，修改内容 `registry = "http://localhost:4873"` (推荐)
-- CLI 运行`npm set registry http://localhost:4873`
+- CLI 运行 `npm set registry http://localhost:4873`
 - 所有 npm 命令内联 `--registry http://localhost:4873`
 
 ## 发布与删除 npm 包
