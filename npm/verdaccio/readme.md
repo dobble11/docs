@@ -27,7 +27,7 @@ npm i -g verdaccio
 
 现在打开地址 http://localhost:4873/ 将显示所有本地软件包
 
-> 注：通过 Verdaccio 代理访问包，需要修改 npm 配置，有三种方法
+> 注：通过 Verdaccio 代理访问包，需要修改 npm 配置 `registry`，有三种方法
 >
 > 1. 项目根目录创建 .npmrc 文件，修改内容 `registry = "http://localhost:4873"` (推荐)
 > 2. CLI 运行`npm set registry http://localhost:4873`
