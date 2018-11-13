@@ -4,7 +4,7 @@
 
 ## 开始
 
-### 安装
+#### 安装
 
 ```sh
 npm i -g verdaccio
@@ -15,7 +15,7 @@ npm i -g verdaccio
 > 1. Node>6.12.0
 > 2. 安装 node-gyp 依赖环境，相关安装手册参考 [node-gyp](https://github.com/dobble11/docs/blob/master/npm/node-gyp.md)
 
-### 用法
+#### 用法
 
 ```sh
 > verdaccio
@@ -51,11 +51,25 @@ npm adduser
 npm publish
 ```
 
+> Verdaccio 的发包流程恰好与下载包相反，会先检查 npm.org 上是否已存在该包名，存在则报错，可以在本地包前加上特定前缀解决冲突。更新包时，也需要注意版本号的增加
+
+取消发布包，只会删除 `package.json` 中 `version` 对应版本包
+
+```sh
+npm unpublish
+```
+
+如果想删除指定版本包，运行
+
+```sh
+npm unpublish xxx@0.0.1
+```
+
 ## 常用配置
 
 ## 服务器配置
 
-### 保持 Verdaccio 永远运行
+#### 保持 Verdaccio 永远运行
 
 安装 PM2
 
