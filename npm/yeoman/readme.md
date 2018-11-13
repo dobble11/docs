@@ -34,9 +34,9 @@ npm i -g yo
 
 ```shell
 npm i -g generator-react-webpack
-// 命令行创建或直接右键创建新的文件夹
+# 命令行创建或直接右键创建新的文件夹
 mkdir react-demo
-// 进入该文件夹 然后yo react-webpack即可
+# 进入该文件夹 然后yo react-webpack即可
 cd react-demo
 yo react-webpack
 ```
@@ -53,9 +53,9 @@ yo react-webpack
 
 ```shell
 npm i -g generator-generator
-// 命令行创建或直接右键创建新的文件夹
+# 命令行创建或直接右键创建新的文件夹
 mkdir react-generator
-// 进入该文件夹 然后yo react-webpack即可
+# 进入该文件夹 然后yo react-webpack即可
 cd react-generator
 yo generator
 ```
@@ -67,14 +67,10 @@ yo generator
 ├── package.json
 ├── generators
 │   ├── app
-│       ├── templates
+│       ├── templates			#默认存放文件的目录
 │           ├── dummyfile.txt
-│       ├── index.js
+│       ├── index.js			#Yeoman的配置文件
 ```
-
-`generators/app/templates/`是默认存放文件的目录，把所有模版文件放在这个目录下
-
-`/generators/app/index.js`是Yeoman的配置文件，定义如何生成我们的脚手架
 
 
 
