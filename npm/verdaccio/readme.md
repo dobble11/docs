@@ -94,6 +94,7 @@ web:
 
 auth:
   htpasswd: # 默认授权插件，也就是使用 .npmrc 中生成的 token
+    # 用户信息存储目录
     file: ./htpasswd
     # 允许注册的最大用户数，默认为 "+inf"
     # 你可以将此值设置为 -1 以禁用注册

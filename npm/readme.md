@@ -66,14 +66,21 @@ npm i -g
 
 ##### 3.1.4 –save与--save-dev参数
 
-使用`npm i`默认会安装`dependencies`字段和`devDependencies`字段中的所有模块 
-+ `–save`：模块名将被添加到`dependencies`，可以简化为参数`-S`
-+ `–save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
-将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`
+使用`npm i`会安装`dependencies`字段和`devDependencies`字段中的所有模块 
++ `--save`：模块名将被添加到`dependencies`，可以简化为参数`-S`,npm 5.x+版本默认添加此参数
++ `--save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
+
+> **将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`**。
+
+> dependencies下记录的是项目在运行时必须依赖的插件，常见的例如vue react jquery等，
+> 即使项目打包好了、上线了，这些也是需要用的，否则程序无法正常执行。
+
+> devDependencies下记录的是项目在开发过程中使用的插件，例如我们开发过程中需要使用webpack打包，
+> 但是一旦项目打包发布、上线了之后，webpack就都没有用了。
 
 一旦将包安装到` node_modules` 目录中，你就可以使用它了。
 
-### 3.2 更新与卸载npm包
+#### 3.2 更新与卸载npm包
 
 ##### 3.2.1 更新npm包
 
@@ -112,7 +119,7 @@ $ npm un <package_name>
 $ npm un -g <package_name>
 ```
 
-### 3.3 npm run指令
+#### 3.3 npm run指令
 
 npm不仅可以用于模块管理，还可以用于执行脚本。`package.json`文件有一个`scripts`字段，可以用于指定脚本命令，供npm直接调用。
 
@@ -234,20 +241,25 @@ npm publish
 
 发布时可能报以下错误：
 
->**1.no_perms Private mode enable, only admin can publish this module**  
- >> 使用cnpm的原因，设置回原本的就可以了
-  **npm config set registry http://registry.npmjs.org**
-  发布完成之后,如果还想回到之前的cnpm,使用下面的命令
-  **npm config set registry https://registry.npm.taobao.org**
+***1.no_perms Private mode enable, only admin can publish this module***
 
->**2.npm ERR! publish Failed PUT 403
+使用cnpm的原因，设置回原本的就可以了
+`npm config set registry http://registry.npmjs.org`
+
+发布完成之后,如果还想回到之前的cnpm,使用下面的命令
+
+`npm config set registry https://registry.npm.taobao.org`
+
+***2.npm ERR! publish Failed PUT 403
 You do not have permission to publish "xxxx". Are you logged in
->as the correct user? : xxxx**
->>这个错误是`package.json`中的name与npm仓库中的包名重复了，修改`package.json`中的name为全网唯一就好了
+as the correct user? : xxxx***
 
->**3.npm ERR! publish Failed PUT 403
-npm ERR! you must verify your email before publishing a new package**
->>没有验证邮箱的原因，去注册npm账号的邮箱找到验证的邮件点击验证链接就行了，链接有可能过期，官网上登录后可以重新发送验证邮件
+这个错误是`package.json`中的name与npm仓库中的包名重复了，修改`package.json`中的name为全网唯一就好了
+
+***3.npm ERR! publish Failed PUT 403
+npm ERR! you must verify your email before publishing a new package***
+
+没有验证邮箱的原因，去注册npm账号的邮箱找到验证的邮件点击验证链接就行了，链接有可能过期，官网上登录后可以重新发送验证邮件
 
 #### 4.4 拉取并使用发布的包
 
