@@ -67,8 +67,8 @@ npm i -g
 ##### 3.1.4 –save与--save-dev参数
 
 使用`npm i`会安装`dependencies`字段和`devDependencies`字段中的所有模块 
-+ `–save`：模块名将被添加到`dependencies`，可以简化为参数`-S`,npm 5.x+版本默认添加此参数
-+ `–save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
++ `--save`：模块名将被添加到`dependencies`，可以简化为参数`-S`,npm 5.x+版本默认添加此参数
++ `--save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
 
 > **将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`**。
 
