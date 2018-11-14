@@ -66,11 +66,11 @@ npm i -g
 
 ##### 3.1.4 –save与--save-dev参数
 
-npm 5.x以上版本使用`npm i`默认会安装`dependencies`字段和`devDependencies`字段中的所有模块 
+使用`npm i`会安装`dependencies`字段和`devDependencies`字段中的所有模块 
 + `–save`：模块名将被添加到`dependencies`，可以简化为参数`-S`
 + `–save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
 
-> 将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`。
+> **将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`**。
 
 > dependencies下记录的是项目在运行时必须依赖的插件，常见的例如vue react jquery等，
 > 即使项目打包好了、上线了，这些也是需要用的，否则程序无法正常执行。
