@@ -4,6 +4,13 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+  initializing() {
+    // 打印欢迎语
+    this.log(
+      yosay(`Welcome to the shining ${chalk.cyan('generator-yeoman-demo')} generator!`)
+    );
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(`Welcome to the superb ${chalk.red('generator-yeoman')} generator!`));
@@ -92,5 +99,6 @@ module.exports = class extends Generator {
 
   end() {
     this.fs.delete('.yo-rc.json'); // 删除无用的文件
+    this.log(chalk.green('Construction completed!'));
   }
 };

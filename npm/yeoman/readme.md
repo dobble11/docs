@@ -82,12 +82,24 @@ yo generator
 
 | 函数         | 释义                                                         |
 | ------------ | ------------------------------------------------------------ |
-| initializing | 初始化方法，用于获取项目状态、配置                           |
+| initializing | 初始化。可以用于获取项目状态、配置                           |
 | prompting    | 调用[inquire](https://github.com/SBoudrias/Inquirer.js)方法获取用户输入（generator与用户交互的主要方式） |
-| configuring  | 保存配置，创建 `.editorconfig` 等文件                        |
+| configuring  | 保存配置。创建 `.editorconfig` 等文件                        |
 | writing      | 执行文件写操作，即项目文件写入文件系统中                     |
 | install      | 执行安装操作，需调用 `this.installDependencies` 方法         |
 | end          | 最后执行，可清除临时文件等                                   |
+
+##### initializing
+
+```js
+// 打印欢迎语
+initializing() {
+    // 打印欢迎语
+    this.log(
+      yosay(`Welcome to the shining ${chalk.cyan('generator-yeoman-demo')} generator!`)
+    );
+}
+```
 
 
 
@@ -158,16 +170,35 @@ writing() {
 -      this.templatePath('dummyfile.txt'),
 -      this.destinationPath('dummyfile.txt')
 -    );
-+    this.fs.copy(this.templatePath('intellif-demo'), this.destinationPath(this.appName));
++    this.fs.copy(this.templatePath('intellif-demo'), this.destinationPath(this.props.appName));
 +        const currPackage = this.fs.readJSON(
-+          this.destinationPath(this.appName + '/package.json'),
++          this.destinationPath(this.props.appName + '/package.json'),
 +          {}
 +        );
-+        currPackage.name = this.appName;
-+        currPackage.author = this.author;
-+        currPackage.description = this.description;
-+        this.fs.writeJSON(this.destinationPath(this.appName + '/package.json'), currPackage);
++        currPackage.name = this.props.appName;
++        currPackage.author = this.props.author;
++        currPackage.description = this.props.description;
++        this.fs.writeJSON(this.destinationPath(this.props.appName + '/package.json'), currPackage);
   }
+```
+
+##### install
+
+```js
+install() {
+    this.installDependencies();
+  }
+```
+
+
+
+##### end
+
+```js
+end() {
+    this.fs.delete('.yo-rc.json'); // 删除无用的文件
+    this.log(chalk.green('Construction completed!'));
+}
 ```
 
 
