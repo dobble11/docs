@@ -195,7 +195,7 @@ About to write to D:\luotongzhou\npm-example\package.json:
 ```json
 # packages.json
 "publishConfig": {
-    "registry": "http://localhost/repository/npm-hosted/" //私有仓库地址
+    "registry": "http://localhost/repository/npm-hosted/" # 私有仓库地址
  }
 ```
 #### 4.2 创建模块入口文件
