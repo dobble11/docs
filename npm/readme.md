@@ -71,8 +71,10 @@ npm 5.x以上版本使用`npm i`默认会安装`dependencies`字段和`devDepend
 + `–save-dev`: 模块名将被添加到`devDependencies`，可以简化为参数`-D`
 
 > 将运行时的依赖安装到`dependencies`，将开发时的依赖安装到`devDependencies`。
+
 > dependencies下记录的是项目在运行时必须依赖的插件，常见的例如vue react jquery等，
 > 即使项目打包好了、上线了，这些也是需要用的，否则程序无法正常执行。
+
 > devDependencies下记录的是项目在开发过程中使用的插件，例如我们开发过程中需要使用webpack打包，
 > 但是一旦项目打包发布、上线了之后，webpack就都没有用了。
 
