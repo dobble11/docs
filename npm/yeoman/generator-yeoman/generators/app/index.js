@@ -99,7 +99,7 @@ module.exports = class extends Generator {
       this.destinationPath(this.props.appName + '/package.json'),
       {}
     );
-    // 根据用户选择，决定是否安装redux
+    // 根据用户选择，决定是否安装redux tes
     if (this.props.includeRedux) {
       // 处理package.json
       currPackage.dependencies = {
