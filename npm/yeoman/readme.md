@@ -49,7 +49,7 @@ yo react-webpack
 
 也可以构建属于自己的脚手架
 
-比如安装生成器 generator-generator
+比如安装生成器 `generator-generator`
 
 ```shell
 npm i -g generator-generator
@@ -67,9 +67,9 @@ yo generator
 ├── package.json
 ├── generators
 │   ├── app
-│       ├── templates			#默认存放文件的目录
+│       ├── templates			# 默认存放文件的目录
 │           ├── dummyfile.txt
-│       ├── index.js			#Yeoman的配置文件
+│       ├── index.js			# Yeoman的配置文件
 ```
 
 
@@ -121,6 +121,12 @@ const prompts = [
 +        message: 'Your project name',
 +        default: this.appname
 +      },
++		{
++        type: 'input',
++        name: 'description',
++        message: 'Your project description',
++        default: 'test des'
++      },
 +      {
 +        type: 'input',
 +        name: 'author',
@@ -158,6 +164,12 @@ const prompts = [
 +          }
 +        ]
 +      },
++      {
++        type: 'confirm',
++        name: 'includeRedux',
++        message: 'Would you like to include Redux in your project?',
++        default: true
++      }
 +      ....
     ];
 ```
@@ -170,15 +182,33 @@ writing() {
 -      this.templatePath('dummyfile.txt'),
 -      this.destinationPath('dummyfile.txt')
 -    );
-+    this.fs.copy(this.templatePath('intellif-demo'), this.destinationPath(this.props.appName));
-+        const currPackage = this.fs.readJSON(
-+          this.destinationPath(this.props.appName + '/package.json'),
-+          {}
-+        );
-+        currPackage.name = this.props.appName;
-+        currPackage.author = this.props.author;
-+        currPackage.description = this.props.description;
-+        this.fs.writeJSON(this.destinationPath(this.props.appName + '/package.json'), currPackage);
++    this.fs.copy(
++      this.templatePath('intellif-demo'),
++      this.destinationPath(this.props.appName),
++      {
++        globOptions: {
++          // https://github.com/isaacs/node-glob
++          dot: true,
++          ignore: ['**/@chooseDownload/**'],
++          gitignore: false
++        }
++      }
++    );
++	  const currPackage = this.fs.readJSON(
++        this.destinationPath(this.props.appName + '/package.json'),
++        {}
++      );
++      // 根据用户选择，决定是否安装redux
++      if (this.props.includeRedux) {
++        // 处理package.json
++        currPackage.dependencies = {
++          redux: '^4.0.0'
++        };
++      }
++      currPackage.name = this.props.appName;
++      currPackage.author = this.props.author;
++      currPackage.description = this.props.description;
++      this.fs.writeJSON(this.destinationPath(this.props.appName + '/package.json'), currPackage);
   }
 ```
 

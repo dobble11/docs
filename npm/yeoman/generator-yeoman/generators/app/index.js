@@ -13,7 +13,7 @@ module.exports = class extends Generator {
 
   prompting() {
     // Have Yeoman greet the user.
-    this.log(yosay(`Welcome to the superb ${chalk.red('generator-yeoman')} generator!`));
+    // this.log(yosay(`Welcome to the superb ${chalk.red('generator-yeoman')} generator!`));
 
     const prompts = [
       {
@@ -43,7 +43,8 @@ module.exports = class extends Generator {
       {
         type: 'confirm',
         name: 'lint',
-        message: 'Use ESLint to lint your code?'
+        message: 'Use ESLint to lint your code?',
+        default: true
       },
       {
         name: 'ESlintStyle',
@@ -64,6 +65,12 @@ module.exports = class extends Generator {
             short: 'Standard'
           }
         ]
+      },
+      {
+        type: 'confirm',
+        name: 'includeRedux',
+        message: 'Would you like to include Redux in your project?',
+        default: true
       }
     ];
 
@@ -78,12 +85,28 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copy(
       this.templatePath('intellif-demo'),
-      this.destinationPath(this.props.appName)
+      this.destinationPath(this.props.appName),
+      {
+        globOptions: {
+          // https://github.com/isaacs/node-glob
+          dot: true,
+          ignore: ['**/@chooseDownload/**'],
+          gitignore: false
+        }
+      }
     );
     const currPackage = this.fs.readJSON(
       this.destinationPath(this.props.appName + '/package.json'),
       {}
     );
+    // 根据用户选择，决定是否安装redux
+    if (this.props.includeRedux) {
+      // 处理package.json
+      currPackage.dependencies = {
+        redux: '^4.0.0'
+      };
+    }
+
     currPackage.name = this.props.appName;
     currPackage.author = this.props.author;
     currPackage.description = this.props.description;
