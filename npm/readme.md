@@ -239,19 +239,24 @@ npm publish
 
 发布时可能报以下错误：
 
-**1.no_perms Private mode enable, only admin can publish this module**  
-使用cnpm的原因，设置回原本的就可以了
-**npm config set registry http://registry.npmjs.org**
-发布完成之后,如果还想回到之前的cnpm,使用下面的命令
-**npm config set registry https://registry.npm.taobao.org**
+***1.no_perms Private mode enable, only admin can publish this module***
 
-**2.npm ERR! publish Failed PUT 403
+使用cnpm的原因，设置回原本的就可以了
+`npm config set registry http://registry.npmjs.org`
+
+发布完成之后,如果还想回到之前的cnpm,使用下面的命令
+
+`npm config set registry https://registry.npm.taobao.org`
+
+***2.npm ERR! publish Failed PUT 403
 You do not have permission to publish "xxxx". Are you logged in
-as the correct user? : xxxx**
+as the correct user? : xxxx***
+
 这个错误是`package.json`中的name与npm仓库中的包名重复了，修改`package.json`中的name为全网唯一就好了
 
-**3.npm ERR! publish Failed PUT 403
-npm ERR! you must verify your email before publishing a new package**
+***3.npm ERR! publish Failed PUT 403
+npm ERR! you must verify your email before publishing a new package***
+
 没有验证邮箱的原因，去注册npm账号的邮箱找到验证的邮件点击验证链接就行了，链接有可能过期，官网上登录后可以重新发送验证邮件
 
 #### 4.4 拉取并使用发布的包
