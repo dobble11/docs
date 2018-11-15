@@ -1,3 +1,7 @@
-const alert = require('if-alert');
+const range = require('if-range');
 
-alert(11);
+let sum = range(1, 11)
+  .map(v => v * v)
+  .reduce((acc, cur) => acc + cur, 0);
+
+console.log(sum);
