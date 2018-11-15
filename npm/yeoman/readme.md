@@ -198,17 +198,42 @@ writing() {
 +        this.destinationPath(this.props.appName + '/package.json'),
 +        {}
 +      );
-+      // 根据用户选择，决定是否安装redux
-+      if (this.props.includeRedux) {
-+        // 处理package.json
-+        currPackage.dependencies = {
-+          redux: '^4.0.0'
-+        };
-+      }
+
++     // 根据用户选择，决定是否安装redux tes
++    if (this.props.includeRedux) {
++      // 处理package.json
++      currPackage.dependencies = {
++        redux: '^4.0.0',
++        'redux-logger': '^3.0.6',
++        'react-redux': '^5.0.7',
++        'redux-thunk': '^2.3.0',
++        'react-router-redux': '^4.0.8'
++      };
++    }
+
++    // 引入redux,关联的文件要替换含有redux的。
++    // 1.src/index.js
++    this.fs.copy(
++      this.templatePath('intellif-demo/chooseDownload/index.js'),
++      this.destinationPath(this.props.appName + '/src/index.js')
++    );
++    // 2.src/constants/rootReducerIndex.js
++    this.fs.copy(
++      this.templatePath('intellif-demo/chooseDownload/rootReducerIndex.js'),
++      this.destinationPath(this.props.appName + '/src/constants/rootReducerIndex.js')
++    );
++    // 3. 把rootStore拿出来(src/constants/rootStore.js)
++    this.fs.copy(
++      this.templatePath('intellif-demo/chooseDownload/rootStore.js'),
++      this.destinationPath(this.props.appName + '/src/constants/rootStore.js')
++    );
++
++    // 创建package.json
 +      currPackage.name = this.props.appName;
 +      currPackage.author = this.props.author;
 +      currPackage.description = this.props.description;
 +      this.fs.writeJSON(this.destinationPath(this.props.appName + '/package.json'), currPackage);
+
   }
 ```
 
@@ -220,8 +245,6 @@ install() {
   }
 ```
 
-
-
 ##### end
 
 ```js
@@ -232,8 +255,6 @@ end() {
 ```
 
 
-
-### 
 
 #### 增加子模板
 
