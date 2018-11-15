@@ -18,6 +18,8 @@
 
 只要一段代码，Yeoman可以创建一个web应用程序或者模板。通过脚手架的方式来创建现代web应用。
 
+
+
 ## 安装与使用
 
 安装yeoman工具箱
@@ -27,6 +29,8 @@ npm i -g yo
 ```
 
 安装yeoman生成器(有超多开源可用的)
+
+
 
 ### react生成器
 
@@ -44,6 +48,8 @@ yo react-webpack
 > 三种常用方法构建react项目之一。
 >
 > 利用yeoman搭建react，可以更**容易配置webpack**。
+
+
 
 ### 定制前端脚手架
 
@@ -100,8 +106,6 @@ initializing() {
     );
 }
 ```
-
-
 
 ##### prompting
 
@@ -266,6 +270,8 @@ yo generator:subgenerator [name]
 
 执行后可在原本生成器generators目录下看到该name的文件
 
+
+
 #### 试运行
 
 可以通过如下方式，将项目加入本地generator 库：
@@ -279,6 +285,8 @@ npm link
 ```sh
 yo [your template name]
 ```
+
+
 
 #### 发布
 
