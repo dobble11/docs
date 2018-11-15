@@ -1,6 +1,6 @@
 {
-  "name": "if-alert",
-  "version": "0.0.2",
+  "name": "if-range",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "publishConfig": {
