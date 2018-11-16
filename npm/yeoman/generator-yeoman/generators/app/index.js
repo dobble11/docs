@@ -77,8 +77,7 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.props = props;
-      this.log(chalk.red('this.props: ', this.props.appName));
-      this.log(chalk.green('name: ', this.props.appName));
+      this.log(chalk.blue('name: ', this.props.appName));
     });
   }
 
@@ -137,11 +136,17 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    // 安装npm依赖和bower依赖
+    // this.installDependencies();
+    // 只安装bower依赖
+    // this.bowerInstall();
+    // 只安装npm组件
+    this.log(chalk.cyan(this.npmInstall));
+    this.npmInstall();
   }
 
   end() {
     this.fs.delete('.yo-rc.json'); // 删除无用的文件
-    this.log(chalk.green('Construction completed!'));
+    this.log(chalk.megenta('Construction completed!'));
   }
 };

@@ -111,6 +111,19 @@ initializing() {
 
  prompting这里，会将用户输入的结果配置到 this.props 对象中，方便后续访问。
 
+prompt包含的键及其释义：
+
+| 键名    | 释义                                                         |
+| ------- | ------------------------------------------------------------ |
+| name    | 用户输入项的标识，在获取用户输入值的时候会用到               |
+| message | 给用户的提示信息                                             |
+| type    | 默认是input，即让用户输入文本；confirm是选择输入“Yes/No"(选填) |
+| default | 用户输入的默认值(选填)                                       |
+
+调用的inquire方法，具体释义查询[`inquirer类库`]([https://www.npmjs.com/package/inquirer])
+
+栗子如下：
+
 ```diff
 const prompts = [
 -    {
@@ -180,6 +193,18 @@ const prompts = [
 
 ##### writing
 
+常用方法：
+
+| 方法                 | 释义                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| this.templatePath    | 返回template目录下文件的地址                                 |
+| this.destinationPath | 加工完成后文件的存放地址，一般是项目目录                     |
+| this.fs.copy         | 把文件从一个目录复制到另一个目录，一般是从template目录复制到你所指定的项目目录，用于**固定文件**和**可选文件**（根据用户选择） |
+| this.fs.copyTp       | 和上面的函数作用一样，不过会事先经过模板引擎的处理，一般用来根据用户输入处理**加工文件** |
+|                      |                                                              |
+
+如下栗子：
+
 ```diff
 writing() {
 -    this.fs.copy(
@@ -245,7 +270,12 @@ writing() {
 
 ```js
 install() {
-    this.installDependencies();
+    // 安装npm依赖和bower依赖
+    //this.installDependencies(); 
+    // 只安装bower依赖
+    //this.bowerInstall();
+    // 只安装npm组件
+    this.npmInstall();
   }
 ```
 
@@ -254,7 +284,7 @@ install() {
 ```js
 end() {
     this.fs.delete('.yo-rc.json'); // 删除无用的文件
-    this.log(chalk.green('Construction completed!'));
+    this.log(chalk.megenta('Construction completed!'));
 }
 ```
 
