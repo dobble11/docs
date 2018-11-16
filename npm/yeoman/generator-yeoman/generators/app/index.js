@@ -7,7 +7,11 @@ module.exports = class extends Generator {
   initializing() {
     // 打印欢迎语
     this.log(
-      yosay(`Welcome to the shining ${chalk.cyan('generator-yeoman-demo')} generator!`)
+      yosay(
+        `Welcome to the shining ${chalk.cyan(
+          'generator-yeoman-demo'
+        )} generator!`
+      )
     );
   }
 
@@ -117,7 +121,9 @@ module.exports = class extends Generator {
     // 2.src/constants/rootReducerIndex.js
     this.fs.copy(
       this.templatePath('intellif-demo/chooseDownload/rootReducerIndex.js'),
-      this.destinationPath(this.props.appName + '/src/constants/rootReducerIndex.js')
+      this.destinationPath(
+        this.props.appName + '/src/constants/rootReducerIndex.js'
+      )
     );
     // 3. 把rootStore拿出来(src/constants/rootStore.js)
     this.fs.copy(
@@ -147,6 +153,6 @@ module.exports = class extends Generator {
 
   end() {
     this.fs.delete('.yo-rc.json'); // 删除无用的文件
-    this.log(chalk.megenta('Construction completed!'));
+    this.log(chalk.blue('Construction completed!'));
   }
 };
