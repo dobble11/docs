@@ -338,7 +338,7 @@ npm config set registry https://registry.npm.taobao.org
 - 全局配置文件: `$PREFIX/etc/npmrc` (即`npm config get globalconfig` 输出的路径)
 - npm内置配置文件: `/path/to/npm/npmrc`
 
-通过这个机制，我们可以方便地在工程根目录创建一个` .npmrc` 文件来共享需要在团队间共享的 npm 运行相关配置。比如如果我们在公司内网环境下需通过代理才可访问 `registry.npmjs.org` 源，或需访问内网的 `registry`, 就可以在工作项目下新增` .npmrc` 文件并提交代码库。
+通过这个机制，我们可以方便地在工程根目录创建一个` .npmrc` 文件来共享需要在团队间共享的 npm 运行相关配置。比如如果我们在公司内网环境下需通过代理才可访问 `registry.npmjs.org` 源，或需访问内网的 `registry`, 就工作项z目下新增` .npmrc` 文件并提交代码库。
 
 ```sh
 proxy = http://proxy.example.com/

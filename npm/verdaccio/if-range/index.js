@@ -3,6 +3,10 @@ module.exports = function() {
     start = 0,
     end = 0;
 
+  if (!arguments) {
+    throw new Error();
+  }
+
   if (arguments.length === 1) {
     end = arguments[0];
   } else if (arguments.length === 2) {
