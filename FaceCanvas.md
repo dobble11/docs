@@ -6,7 +6,7 @@
 | face             | 人脸对象数据                                     | `Face`        | -                               |
 | selectedPartName | 已选择的部位名，被选择的部位在画布中会显示控制框 | `string`      | -                               |
 | rendered         | 状态标记，是否已经渲染                           | `bool`        | `false`                         |
-| recorded         | 状态标记，是否已经记录                           | `fasle`       | `bool`                          | `false` |
+| recorded         | 状态标记，是否已经记录                           | `bool`        | `bool`                          | `false` |
 | onModified       | 图层修改回调                                     | `onModified`  | -                               |
 | onSelected       | 选择图层回调                                     | `onSelected`  | -                               |
 | zoom             | 缩放选项                                         | `ZoomOptions` | `{min: 50, val: 100, max: 150}` |
