@@ -1,5 +1,7 @@
 # 人脸拼图组件
 
+![预览](https://github.com/dobble11/aseets/blob/master/1.PNG)
+
 ### FaceCanvas
 
 | 属性             | 说明                                             | 类型          | 默认值                          |
