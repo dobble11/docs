@@ -135,6 +135,8 @@ logs:
 
 ## 服务器配置
 
+### Linux
+
 #### 保持 Verdaccio 永远运行
 
 安装 PM2
@@ -150,5 +152,21 @@ $ sudo npm i -g pm2
 ```sh
 $ pm2 start verdaccio
 ```
+
+### Windows Server
+
+> 以下以具体环境搭建介绍，实际使用类推。由于官方文档介绍的全局安装在 windows Server 上会有问题，也综合 c 盘确实容量有限，所以采用本地安装
+
+- 创建文件夹 D:\verdaccio
+- 进入文件夹，此处打开终端，运行 `npm i verdaccio`
+- 复制 D:\verdaccio\node_modules\verdaccio\conf\default.yaml 中的内容到新建文件 D:\verdaccio\config.yaml，作为默认配置文件
+
+安装守护进程 [nssm](http://www.nssm.cc/download)，解压出 nssm.exe 文件放到新建目录 D:\verdaccio\mssn 下，将此路径添加到系统 PATH 中，使 nssm 命令全局可用
+
+- 终端运行 `nssm install verdaccio` 创建服务，会弹出详细信息对话框，选择 .bin\verdaccio.cmd 的运行路径，会自动填写 Path、Startup directory 参数
+- 修改 Arguments：`-c D:\verdaccio\config.yaml`
+
+结果如下 ![nssm配置](https://github.com/dobble11/aseets/blob/master/2.png)
+最后启动 verdaccio 服务，运行 `nssm start verdaccio`
 
 > 由于 Verdaccio 默认监听的是 localhost，无法通过 ip 访问，可以通过设置 config.yaml 中的 `listen` 值为 `0.0.0.0:4873`
