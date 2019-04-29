@@ -86,7 +86,7 @@ if(inst instanceof Base){
 
 4. 函数或变量后面添加 !
 
-当要去掉联合类型的可空类型（null|undefined）,可以使用 js if 语句实现类型保护或短路运算符，也可以使用 Typescript 2.0+ !语法
+当要去掉联合类型的可空类型（null | undefined）,可以使用 js if 语句或短路运算符实现类型保护，也可以使用 Typescript 2.0+ !语法
 
 ```ts
 const x: string | null = getDynamicValue();
