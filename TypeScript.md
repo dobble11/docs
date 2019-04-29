@@ -1,4 +1,4 @@
-# Typescript 入门
+# Typescript 入门与 React 配合使用
 
 ## 引言
 
@@ -12,6 +12,98 @@ Typescript 优势：
 ## Typescript 类型系统
 
 ![image](https://note.youdao.com/yws/public/resource/2977a2eee38c81c6adafee2e9b196dea/xmlnote/D3C48ECFDB1941FABB1D194D8DD832FC/14093)
+
+## 类型兼容性
+
+TypeScript 里的类型兼容性是基于结构化类型的。结构类型是一种只使用其成员来描述类型的方式。
+
+```ts
+interface Named {
+  name: string;
+}
+
+let x: Named;
+// y 推断的类型是 { name: string; location: string; }
+let y = { name: 'Alice', location: 'Seattle' };
+x = y; // OK
+```
+
+TypeScript 结构化类型系统的基本规则是，如果 x 要兼容 y，那么 y 至少具有与 x 相同的属性。也就是赋值语句左边数据结构需要是右边的子集（ any、enum 除外）。
+
+在 TypeScript 里，有两种兼容性：子类型和赋值。 它们的不同点在于，赋值扩展了子类型兼容性，增加了一些规则，**允许和 any 来回赋值，以及 enum 和对应数字值或字符串值之间的来回赋值**。
+
+语言里的不同地方分别使用了它们之中的机制。 实际上，类型兼容性是由赋值兼容性来控制的，即使在 implements 和 extends 语句也不例外。
+
+## 类型保护
+
+1. as 操作符（类型断言）
+
+当你比 ts 更确定其数据类型，你能使用 as 语法确定其类型，但需要遵守类型兼容转换。
+另外一种写法：\<typeName\>varName，但不建议使用
+
+```ts
+function getDynamicValue():number|string|undefined{
+  ...
+}
+
+const v=getDynamicValue();  // v:number|string|undefined，联合类型变量只允许访问所有类型共有的属性
+
+// 确定返回 string
+(v as string).trim();
+```
+
+2. typeof 操作符
+
+```ts
+function isNumber(val: any): val is number {
+  return typeof val === 'number';
+}
+
+const a: any = 1;
+
+if (isNumber(a)) {
+  // a:number
+}
+```
+
+3. instanceof 操作符
+
+```ts
+class Base {
+  ...
+}
+
+class A extends Base{
+  ...
+}
+
+const inst:Base=new A();
+
+if(inst instanceof Base){
+  // inst:A
+}
+```
+
+4. 函数或变量后面添加 !
+
+当要去掉联合类型的可空类型（null|undefined）,可以使用 js if 语句实现类型保护或短路运算符，也可以使用 Typescript 2.0+ !语法
+
+```ts
+const x: string | null = getDynamicValue();
+
+// if判断
+if (x) {
+  // x:string
+}
+// 短路运算符
+function f(sn: string | null) {
+  return sn || '';
+}
+// !语法
+x!.trim();
+// or
+const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
+```
 
 ## Typescript 项目基本构成
 
@@ -164,96 +256,4 @@ class Map extends React.Component<MapProps, MapState> {
 }
 
 export default Map;
-```
-
-## 类型兼容性
-
-TypeScript 里的类型兼容性是基于结构化类型的。结构类型是一种只使用其成员来描述类型的方式。
-
-```ts
-interface Named {
-  name: string;
-}
-
-let x: Named;
-// y 推断的类型是 { name: string; location: string; }
-let y = { name: 'Alice', location: 'Seattle' };
-x = y; // OK
-```
-
-TypeScript 结构化类型系统的基本规则是，如果 x 要兼容 y，那么 y 至少具有与 x 相同的属性。也就是赋值语句左边数据结构需要是右边的子集（ any、enum 除外）。
-
-在 TypeScript 里，有两种兼容性：子类型和赋值。 它们的不同点在于，赋值扩展了子类型兼容性，增加了一些规则，**允许和 any 来回赋值，以及 enum 和对应数字值或字符串值之间的来回赋值**。
-
-语言里的不同地方分别使用了它们之中的机制。 实际上，类型兼容性是由赋值兼容性来控制的，即使在 implements 和 extends 语句也不例外。
-
-## 类型保护
-
-1. as 操作符（类型断言）
-
-当你比 ts 更确定其数据类型，你能使用 as 语法确定其类型，但需要遵守类型兼容转换。
-另外一种写法：\<typeName\>varName，但不建议使用
-
-```ts
-function getDynamicValue():number|string|undefined{
-  ...
-}
-
-const v=getDynamicValue();  // v:number|string|undefined，联合类型变量只允许访问所有类型共有的属性
-
-// 确定返回 string
-(v as string).trim();
-```
-
-2. typeof 操作符
-
-```ts
-function isNumber(val: any): val is number {
-  return typeof val === 'number';
-}
-
-const a: any = 1;
-
-if (isNumber(a)) {
-  // a:number
-}
-```
-
-3. instanceof 操作符
-
-```ts
-class Base {
-  ...
-}
-
-class A extends Base{
-  ...
-}
-
-const inst:Base=new A();
-
-if(inst instanceof Base){
-  // inst:A
-}
-```
-
-4. 函数或变量后面添加 !
-
-当要去掉联合类型的可空类型（null|undefined）,可以使用 js if 语句实现类型保护或短路运算符，也可以使用 Typescript 2.0+ !语法
-
-```ts
-const x: string | null = getDynamicValue();
-
-// if判断
-if (x) {
-  // x:string
-}
-// 短路运算符
-function f(sn: string | null) {
-  return sn || '';
-}
-// !语法
-x!.trim();
-// or
-const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 ```
