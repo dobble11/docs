@@ -1,4 +1,4 @@
-# Typescript 入门与 React 配合使用
+# TypeScript 入门与 React 配合使用
 
 ## 引言
 
