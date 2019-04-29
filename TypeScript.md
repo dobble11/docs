@@ -2,14 +2,14 @@
 
 ## 引言
 
-Typescript 优势：
+TypeScript 优势：
 
 - 静态类型检查与代码提示
 - 适用大型项目开发，如代码重构等
 - 更好的协作
 - 更强的生产力
 
-## Typescript 类型系统
+## TypeScript 类型系统
 
 ![image](https://note.youdao.com/yws/public/resource/2977a2eee38c81c6adafee2e9b196dea/xmlnote/D3C48ECFDB1941FABB1D194D8DD832FC/14093)
 
@@ -105,7 +105,7 @@ x!.trim();
 const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 ```
 
-## Typescript 项目基本构成
+## TypeScript 项目基本构成
 
 一个 react+ts 项目的目录结构：
 
