@@ -42,11 +42,11 @@ TypeScript 结构化类型系统的基本规则是，如果 x 要兼容 y，那�
 另外一种写法：\<typeName\>varName，但不建议使用
 
 ```ts
-function getDynamicValue():number|string|undefined{
+function getDynamicValue(): number | string | undefined {
   ...
 }
 
-const v=getDynamicValue();  // v:number|string|undefined，联合类型变量只允许访问所有类型共有的属性
+const v = getDynamicValue(); // v:number|string|undefined，联合类型变量只允许访问所有类型共有的属性
 
 // 确定返回 string
 (v as string).trim();
@@ -79,7 +79,7 @@ class A extends Base{
 
 const inst:Base=new A();
 
-if(inst instanceof Base){
+if(inst instanceof A){
   // inst:A
 }
 ```
@@ -130,13 +130,13 @@ const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 │ │ ├── request.ts               # 基于fetch封装的API请求工具
 │ │ ├── global.ts                # 公共方法库
 │ └── index.tsx                  # 项目入口
-|——tsconfig.json                 # ts配置
+|—— tsconfig.json                 # ts配置
 |——...
 ```
 
 ### tsconfig.json
 
-在项目根目录下，这个 json 文件规定了 ts 的编译选项，相见的编译选项配置：
+在项目根目录下，这个 json 文件规定了 ts 的编译选项，相应的编译选项配置：
 
 ```json
 {
@@ -237,22 +237,22 @@ interface MapProps {
   height?: string;
 }
 interface MapState {
-  map?:L.Map;
+  map?: L.Map;
 }
 
 class Map extends React.Component<MapProps, MapState> {
-    static defaultProps:MapProps{
-       width: '300px',
-       height: '200px'
-    }
+  static defaultProps: MapProps = {
+    width: '300px',
+    height: '200px'
+  };
 
-    state:MapState= {}
+  state: MapState = {};
 
-    render() {
-        return(
+  render() {
+    return(
 
-        )
-    }
+    )
+  }
 }
 
 export default Map;
