@@ -73,13 +73,13 @@ class Base {
   ...
 }
 
-class A extends Base{
+class A extends Base {
   ...
 }
 
-const inst:Base=new A();
+const inst: Base = new A();
 
-if(inst instanceof A){
+if (inst instanceof A) {
   // inst:A
 }
 ```
