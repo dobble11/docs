@@ -130,8 +130,8 @@ const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 │ │ ├── request.ts               # 基于fetch封装的API请求工具
 │ │ ├── global.ts                # 公共方法库
 │ └── index.tsx                  # 项目入口
-|—— tsconfig.json                 # ts配置
-|——...
+|—— tsconfig.json                # ts配置
+|—— ...
 ```
 
 ### tsconfig.json
