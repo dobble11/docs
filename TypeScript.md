@@ -144,7 +144,7 @@ const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
     "baseUrl": ".", // 用于解析非相对模块名称的基目录
     "outDir": "build/dist", // 指定输出目录
     "module": "esnext", // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
-    "target": "es5", // 指定 ECMAScript 目标版本:
+    "target": "es5", // 指定 ECMAScript 目标版本
     "lib": ["dom", "esnext"], // 指定要包含在编译中的库文件
     "sourceMap": true, // 生成相应的 '.map' 文件
     "allowJs": true, // 允许编译 javascript 文件
