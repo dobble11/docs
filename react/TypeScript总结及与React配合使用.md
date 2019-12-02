@@ -1,5 +1,3 @@
-# TypeScript 入门与 React 配合使用
-
 ## 引言
 
 TypeScript 优势：
@@ -24,7 +22,7 @@ interface Named {
 
 let x: Named;
 // y 推断的类型是 { name: string; location: string; }
-let y = { name: 'Alice', location: 'Seattle' };
+let y = { name: "Alice", location: "Seattle" };
 x = y; // OK
 ```
 
@@ -56,7 +54,7 @@ const v = getDynamicValue(); // v:number|string|undefined，联合类型变量�
 
 ```ts
 function isNumber(val: any): val is number {
-  return typeof val === 'number';
+  return typeof val === "number";
 }
 
 const a: any = 1;
@@ -97,7 +95,7 @@ if (x) {
 }
 // 短路运算符
 function f(sn: string | null) {
-  return sn || '';
+  return sn || "";
 }
 // !语法
 x!.trim();
@@ -110,24 +108,24 @@ const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 一个 react+ts 项目的目录结构：
 
 ```sh
+├── /.vscode/                    # vscode 配置目录，包含常用的代码片段、设置等
 ├── /@types/                     # 全局类型声明
-├── /config/                     # Create React App脚手架webpack配置文件目录
-├── /scripts/                    # npm执行脚本目录
 ├── /src/                        # 源码目录
-│ ├── /actions/                  # action目录
 │ ├── /assets/                   # 静态资源目录
-│ ├── /components/               # 公共组件目录
-│ ├── /constants/                # 项目constants目录
-│ │ ├── _const.scss              # scss常量
-│ │ ├── ActionTypes.ts           # ActionType常量
-│ │ └── Api.ts                   # API常量
-│ ├── /pages/                    # UI组件目录
-│ ├── /reducer/                  # reducer目录
+│ ├── /components/               # 公共业务组件目录
+│ ├── /constants/                # constant 目录
+│ │ ├── _const.scss              # scss 常量
+│ │ └── Api.ts                   # API 常量
+│ │ └── store.ts                 # store
+│ │ └── router.ts                # 路由树
+│ ├── /hooks/                    # hook 目录
+│ ├── /layouts/                  # 布局目录
+│ ├── /models/                   # 模型目录
+│ ├── /pages/                    # 页面组件目录
 │ ├── /services/                 # 请求服务目录
-│ ├── /store/                    # 存放store文件目录
 │ ├── /style/                    # 全局样式
-│ ├── /utils/                    # utils目录
-│ │ ├── request.ts               # 基于fetch封装的API请求工具
+│ ├── /utils/                    # util 目录
+│ │ ├── request.ts               # 基于 fetch 封装的 http 请求工具
 │ │ ├── global.ts                # 公共方法库
 │ └── index.tsx                  # 项目入口
 |—— tsconfig.json                # ts配置
@@ -202,22 +200,22 @@ declare const config: {
   debug: boolean;
 };
 
-declare interface IResponseBody<T> {
+declare interface ResponseBody<T> {
   data: T;
   code: number;
-  total: number;
+  message: string;
 }
 ```
 
 2. 非 js 资源
 
 ```ts
-declare module '*.svg';
-declare module '*.png';
-declare module '*.jpg';
+declare module "*.svg";
+declare module "*.png";
+declare module "*.jpg";
 
-declare module '*.module.css';
-declare module '*.module.scss';
+declare module "*.module.css";
+declare module "*.module.scss";
 ```
 
 ## jsx
@@ -228,9 +226,9 @@ declare module '*.module.scss';
 - 在你的项目里为 JSX 和 React 安装声明文件：yarn add @types/react @types/react-dom -D；
 - react.d.ts 文件定义了 React.Component<Props,State>，例用 props 和 state 对组件进行类型检查。
 
-```ts
-import * as React from 'react';
-import * as L from 'leaflet';
+```tsx
+import React from 'react';
+import L from 'leaflet';
 
 interface MapProps {
   width?: string;
