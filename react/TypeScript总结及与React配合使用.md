@@ -132,6 +132,8 @@ const r = [1, 2, 3, 4].find(x => x === 3)!; // r:number
 |—— ...
 ```
 
+项目模板地址：https://github.com/dobble11/epee-react-admin-ts
+
 ### tsconfig.json
 
 在项目根目录下，这个 json 文件规定了 ts 的编译选项，相应的编译选项配置：
