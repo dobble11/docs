@@ -4,7 +4,7 @@
 
 ### 16.3+ 生命周期图
 
-![16.3生命周期图](https://github.com/dobble11/aseets/blob/master/3.png)
+![16.3生命周期图](https://raw.githubusercontent.com/dobble11/aseets/master/3.png)
 
 新的生命周期函数 `getDerivedStateFromProps(nextProps,prevState)` 内不能访问 `this`，由于这是一个静态函数，其返回值作为 state 值，返回 null 表示不需要更新 state
 
@@ -12,7 +12,7 @@
 
 ### 之前版本生命周期
 
-![生命周期图](https://github.com/dobble11/aseets/blob/master/4.jpg)
+![生命周期图](https://raw.githubusercontent.com/dobble11/aseets/master/4.jpg)
 
 生命周期函数 `componentWillReceiveProps(nextProps)` 用于更新派生自 props 的 state 值（通过调用 setState ）
 

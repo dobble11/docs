@@ -2,7 +2,7 @@
 
 _Hook_ 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
 
-**React Hooks 要解决的问题是状态逻辑（也称行为）复用**，之前通过 [render-props](https://zh-hans.reactjs.org/docs/render-props.html) 和 [higher-order components](https://zh-hans.reactjs.org/docs/higher-order-components.html) 方式实现，不但会增加组件的嵌套层级，在多个行为复用时还会出现 JSX 嵌套地狱问题。
+**React Hooks 要解决的问题是状态逻辑（也称行为）复用**，之前通过 [render-props](https://zh-hans.reactjs.org/docs/render-props.html) 和 [higher-order components](https://zh-hans.reactjs.org/docs/higher-order-components.html) 方式实现，不但会增加组件的嵌套层级，在复用多个行为时还会出现 JSX 嵌套地狱问题。
 
 ## Hook 特点
 
@@ -25,6 +25,8 @@ function Consumer({ on, toggle }) {
 }
 ```
 
+### 三种实现方式
+
 **render-props**
 
 ```jsx
@@ -33,9 +35,9 @@ class ToggleProvider extends React.Component {
     on: this.props.initial ?? false
   };
 
-  toggle() {
+  toggle = () => {
     this.setState({ on: !this.state.on });
-  }
+  };
 
   render() {
     return React.cloneElement(this.props.children, {
@@ -48,7 +50,7 @@ class ToggleProvider extends React.Component {
 function App() {
   return (
     <ToggleProvider initial={true}>
-       <Consumer>
+      <Consumer />
     </ToggleProvider>
   );
 }
@@ -64,9 +66,9 @@ function createToggle(initial = false) {
         on: initial
       };
 
-      toggle() {
+      toggle = () => {
         this.setState({ on: !this.state.on });
-      }
+      };
 
       render() {
         return (
@@ -101,7 +103,7 @@ function useToggle(
 function App() {
   const [on, toggle] = useToggle(true);
 
-  return <Consumer on={on} toggle={toggle}>;
+  return <Consumer on={on} toggle={toggle} />;
 }
 ```
 
