@@ -42,17 +42,19 @@ React Hooks 带来的好处不仅是 “更 FP，更新粒度更细，代码更�
 
 ```ts
 const HOOKS: any[] = [];
-const index = 0;
+let cursor = 0;
 
 function useState<T>(initialState: T): [T, (newState: T) => void] {
+  const index = cursor;
   HOOKS[index] = HOOKS[index] || initialState; // 检查是否渲染过
 
   function setState(newState: T) {
     HOOKS[index] = newState;
-    render();
+    // 触发组件渲染
   }
 
-  return [HOOKS[index++], setState];
+  cursor++;
+  return [HOOKS[index], setState];
 }
 ```
 
