@@ -41,25 +41,25 @@ React Hooks 带来的好处不仅是 “更 FP，更新粒度更细，代码更�
 ## 简单的 Hook 实现
 
 ```ts
-const states: any[] = [];
+const HOOKS: any[] = [];
 const index = 0;
 
 function useState<T>(initialState: T): [T, (newState: T) => void] {
-  states[index] = states[index] || initialState; // 检查是否渲染过
+  HOOKS[index] = HOOKS[index] || initialState; // 检查是否渲染过
 
   function setState(newState: T) {
-    states[index] = newState;
+    HOOKS[index] = newState;
     render();
   }
 
-  ++index;
-  return [states[index], setState];
+  return [HOOKS[index++], setState];
 }
 ```
 
-> 使用 Hook 需要遵守下面两条规则  
-> 1.只能在最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook
-> 2.Hook 函数必须以 "use" 命名开头
+> 使用 Hook 需要遵守下面两条规则
+>
+> 1. 只能在最顶层使用 Hook，不要在循环，条件或嵌套函数中调用 Hook
+> 2. Hook 函数必须以 "use" 命名开头
 
 React 也提供了对应的 eslint 插件（`eslint-plugin-react-hooks`）来检查以上规则。
 
