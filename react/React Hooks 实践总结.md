@@ -29,7 +29,7 @@ function Example() {
 }
 ```
 
-React Hooks 带来的好处不仅是 “更 FP，更新粒度更细，代码更清晰”，其特性如下：
+React Hooks 带来的好处不仅是 “更 FP，更新粒度更细，代码更清晰”，还拥有如下特性：
 
 1. 无多余的嵌套组件
 2. Hooks 可以引用其他 Hooks
@@ -50,6 +50,7 @@ function useState<T>(initialState: T): [T, (newState: T) => void] {
 
   function setState(newState: T) {
     HOOKS[index] = newState;
+    cursor = 0;
     // 触发组件渲染
   }
 
