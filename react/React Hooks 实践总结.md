@@ -9,23 +9,23 @@ _Hook_ 是 React 16.8 的新增特性。它可以让你在不编写 class 的情
 一个简单使用 Hook 开发的函数组件代码
 
 ```tsx
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 function Example() {
-  // 声明一个新的叫做 “count” 的 state 变量
-  const [count, setCount] = useState(0);
+    // 声明一个新的叫做 “count” 的 state 变量
+    const [count, setCount] = useState(0)
 
-  useEffect(() => {
-    // 每次渲染更新文档标题
-    document.title = `You clicked ${count} times`;
-  });
+    useEffect(() => {
+        // 每次渲染更新文档标题
+        document.title = `You clicked ${count} times`
+    })
 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
-  );
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>Click me</button>
+        </div>
+    )
 }
 ```
 
@@ -41,21 +41,21 @@ React Hooks 带来的好处不仅是 “更 FP，更新粒度更细，代码更�
 ## 简单的 Hook 实现
 
 ```ts
-const HOOKS: any[] = [];
-let cursor = 0;
+const HOOKS: any[] = []
+let cursor = 0
 
 function useState<T>(initialState: T): [T, (newState: T) => void] {
-  const index = cursor;
-  HOOKS[index] = HOOKS[index] || initialState; // 检查是否渲染过
+    const index = cursor
+    HOOKS[index] = HOOKS[index] || initialState // 检查是否渲染过
 
-  function setState(newState: T) {
-    HOOKS[index] = newState;
-    cursor = 0;
-    // 触发组件渲染
-  }
+    function setState(newState: T) {
+        HOOKS[index] = newState
+        cursor = 0
+        // 触发组件渲染
+    }
 
-  cursor++;
-  return [HOOKS[index], setState];
+    cursor++
+    return [HOOKS[index], setState]
 }
 ```
 
@@ -74,73 +74,71 @@ React 也提供了对应的 eslint 插件（`eslint-plugin-react-hooks`）来检
 
 ```jsx
 function Consumer({ on, toggle }) {
-  return (
-    <>
-      <Button onClick={toggle}>Open Modal</Button>
-      <Modal visible={on} onOk={toggle} onCancel={toggle} />
-    </>
-  );
+    return (
+        <>
+            <Button onClick={toggle}>Open Modal</Button>
+            <Modal visible={on} onOk={toggle} onCancel={toggle} />
+        </>
+    )
 }
 ```
 
 **三种实现方式**
 
-- render-props
+-   render-props
 
 ```jsx
 class ToggleProvider extends React.Component {
-  state = {
-    on: this.props.initial ?? false
-  };
+    state = {
+        on: this.props.initial ?? false,
+    }
 
-  toggle = () => {
-    this.setState({ on: !this.state.on });
-  };
+    toggle = () => {
+        this.setState({ on: !this.state.on })
+    }
 
-  render() {
-    return React.cloneElement(this.props.children, {
-      on: this.state.on,
-      toggle: this.toggle
-    });
-  }
+    render() {
+        return React.cloneElement(this.props.children, {
+            on: this.state.on,
+            toggle: this.toggle,
+        })
+    }
 }
 
 function App() {
-  return (
-    <ToggleProvider initial={true}>
-      <Consumer />
-    </ToggleProvider>
-  );
+    return (
+        <ToggleProvider initial={true}>
+            <Consumer />
+        </ToggleProvider>
+    )
 }
 ```
 
-- higher-order components
+-   higher-order components
 
 ```jsx
 function createToggle(initial = false) {
-  return function withToggle(Component) {
-    return class extends React.Component {
-      state = {
-        on: initial
-      };
+    return function withToggle(Component) {
+        return class extends React.Component {
+            state = {
+                on: initial,
+            }
 
-      toggle = () => {
-        this.setState({ on: !this.state.on });
-      };
+            toggle = () => {
+                this.setState({ on: !this.state.on })
+            }
 
-      render() {
-        return (
-          <Component {...this.props} on={this.state.on} toggle={this.toggle} />
-        );
-      }
-    };
-  };
+            render() {
+                return <Component {...this.props} on={this.state.on} toggle={this.toggle} />
+            }
+        }
+    }
 }
 
-createToggle(true)(Consumer);
+createToggle(true)(Consumer)
 ```
 
-- hook
+-   hook
 
 ```tsx
 function useToggle(
@@ -171,8 +169,8 @@ function App() {
 
 ```ts
 // ref.current
-const cntr = useRef<HTMLDivElement | null>(null);
-const chart = useRef<echarts.ECharts | null>(null);
+const cntr = useRef<HTMLDivElement | null>(null)
+const chart = useRef<echarts.ECharts | null>(null)
 ```
 
 2. 常见生命周期的模拟
@@ -180,26 +178,26 @@ const chart = useRef<echarts.ECharts | null>(null);
 ```ts
 // didMount
 useEffect(() => {
-  /* do something */
-}, []);
+    /* do something */
+}, [])
 
 // unmount
 useEffect(() => {
-  return () => {
-    /* do something */
-  };
-}, []);
+    return () => {
+        /* do something */
+    }
+}, [])
 
 // didUpdate
 useEffect(() => {
-  const isFirst = useRef(true);
+    const isFirst = useRef(true)
 
-  if (!isFirst.current) {
-    /* do something */
-  } else {
-    isFirst.current = false;
-  }
-});
+    if (!isFirst.current) {
+        /* do something */
+    } else {
+        isFirst.current = false
+    }
+})
 ```
 
 第三方库 `react-use` 已经提供了各生命周期的 hook 函数及其它 hook
@@ -207,20 +205,22 @@ useEffect(() => {
 3. 如何实现继发间隔发送请求
 
 ```ts
-const timerRef = useRef<NodeJS.Timeout | null>(null);
+const timerRef = useRef<NodeJS.Timeout | null>(null)
 const taskRef = useRef(function task() {
-  timerRef.current = setTimeout(async () => {
-    await fetch();
-    task();
-  }, 5000);
-});
+    timerRef.current = setTimeout(async () => {
+        await fetch()
+        task()
+    }, 5000)
+})
 
 useEffect(() => {
-  taskRef.current();
-  return () => {
-    timerRef.current && clearTimeout(timerRef.current);
-  };
-}, []);
+    taskRef.current()
+    return () => {
+        timerRef.current && clearTimeout(timerRef.current)
+    }
+}, [])
 ```
 
-总结：大部分 Hook 使用问题都是如何保存实例引用
+## 总结
+
+大部分 Hook 使用问题都是如何保存实例引用，避免重复的触发渲染问题
